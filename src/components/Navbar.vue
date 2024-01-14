@@ -1,6 +1,4 @@
-<script setup>
-import DarkModeBtn from "./DarkModeBtn.vue";
-</script>
+<script setup></script>
 
 <template>
    <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -23,10 +21,8 @@ import DarkModeBtn from "./DarkModeBtn.vue";
                      ></path>
                   </svg>
                </button>
-               <a href="https://flowbite.com" class="flex ms-2 md:me-24"
-                  ><DarkModeBtn></DarkModeBtn>
-                  <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" />
-                  <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Join</span>
+               <a href="https://flowbite.com" class="flex ms-2 md:me-24">
+                  <img src="../assets/logo.svg" class="h-8 me-3" alt="Join Logo" />
                </a>
             </div>
             <div class="flex items-center">
@@ -39,7 +35,7 @@ import DarkModeBtn from "./DarkModeBtn.vue";
                         data-dropdown-toggle="dropdown-user"
                      >
                         <span class="sr-only">Open user menu</span>
-                        <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo" />
+                        <img class="w-8 h-8 rounded-full" src="../assets/user.svg" alt="user photo" />
                      </button>
                   </div>
                   <div

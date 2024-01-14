@@ -7,7 +7,6 @@
 </template>
 
 <script setup>
-import { FwbCard } from "flowbite-vue";
 import Navbar from "./components/Navbar.vue";
 import Sidebar from "./components/Sidebar.vue";
 import KanbanMain from "./components/KanbanMain.vue";
