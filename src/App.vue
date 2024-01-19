@@ -1,15 +1,16 @@
 <template>
-   <div class="max-w-full h-screen">
-      <Navbar></Navbar>
-      <Sidebar></Sidebar>
-      <KanbanMain></KanbanMain>
+   <div class="w-screen min-h-screen">
+      <div class="h-20"><Navbar></Navbar></div>
+      <div class="h-[calc(100vh-5rem)] lg:ml-64 lg:w-[calc(100vw-16rem)] w-screen bg-white dark:bg-gray-800">
+         <Sidebar></Sidebar>
+         <div class="w-full h-full p-4"><router-view> </router-view></div>
+      </div>
    </div>
 </template>
 
 <script setup>
 import Navbar from "./components/Navbar.vue";
 import Sidebar from "./components/Sidebar.vue";
-import KanbanMain from "./components/KanbanMain.vue";
 
 import { onMounted } from "vue";
 
