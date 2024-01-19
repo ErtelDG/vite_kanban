@@ -1,18 +1,18 @@
 <template>
    <div class="flex justify-center items-center p-4 2xl:justify-start">
       <div class="flex flex-col justify-center xl:items-start items-center gap-16">
-         <div class="sm2:block hidden">
-            <div style="width: 625px; height: 73px; justify-content: center; align-items: center; gap: 30px; display: inline-flex">
-               <div style="color: black; font-size: 61px; font-weight: 700; line-height: 73.2px; word-wrap: break-word">Join 360</div>
-               <div style="width: 0px; height: 59px; border: 3px #29abe2 solid"></div>
-               <div style="color: #2a3647; font-size: 27px; font-weight: 400; line-height: 32.4px; word-wrap: break-word">Key Metrics at a Glance</div>
-            </div>
+         <div class="w-full" style="height: 73px; justify-content: center; align-items: center; gap: 30px; display: inline-flex" >
+            <div class="sm2:block hidden" style="color: black; font-size: 58px; font-weight: 700; line-height: 73.2px; word-wrap: break-word">Join 360</div>
+            <div class="sm2:block hidden" style="width: 0px; height: 59px; border: 3px #29abe2 solid"></div>
+            <div class="sm2:block hidden" style="color: #2a3647; font-size: 27px; font-weight: 400; line-height: 32.4px; word-wrap: break-word">Key Metrics at a Glance</div>
+            <div class="sm2:hidden underline" style="color: #2a3647; font-size: 28px; font-weight: 400; line-height: 32.4px; word-wrap: break-word">Key Metrics at a Glance</div>
          </div>
+
          <div class="flex items-center gap-16">
             <div class="w-[560px] h-[562px] flex-col justify-center items-start gap-7 sm:inline-flex hidden">
                <div class="self-stretch h-[168px] justify-center items-start gap-8 inline-flex">
                   <div
-                     class="grow shrink basis-0 self-stretch px-[19px] py-[38px] bg-white rounded-[30px] shadow justify-center items-center gap-[18px] inline-flex"
+                     class="grow shrink basis-0 self-stretch px-[38px] py-[38px] bg-white rounded-[30px] shadow justify-center items-center gap-[18px] inline-flex"
                   >
                      <div class="flex-col justify-center items-center gap-2.5 inline-flex">
                         <div class="w-[69px] h-[69px] relative">
@@ -28,7 +28,7 @@
                      </div>
                   </div>
                   <div
-                     class="grow shrink basis-0 self-stretch px-[58px] py-[38px] bg-white rounded-[30px] shadow justify-center items-center gap-[18px] inline-flex"
+                     class="grow shrink basis-0 self-stretch px-[38px] py-[38px] bg-white rounded-[30px] shadow justify-center items-center gap-[18px] inline-flex"
                   >
                      <div class="justify-start items-start gap-2.5 flex">
                         <div class="w-[69px] h-[69px] relative">
@@ -46,8 +46,8 @@
                      <div class="justify-center items-center gap-2.5 flex">
                         <div class="w-[60px] h-[60px] relative">
                            <div class="w-[60px] h-[60px] left-0 top-0 absolute bg-orange-600 rounded-full"></div>
-                           <div class="w-[34.19px] h-[25.12px] left-[12.56px] top-[16.05px] absolute justify-center items-center inline-flex">
-                              <div class="w-[34.19px] h-[25.12px] relative"></div>
+                           <div class="w-[34.19px] h-[25.12px] left-[12.56px] top-[16.05px] absolute">
+                              <div class="w-[34.19px] h-[25.12px] left-[-0px] top-[-0px] absolute"></div>
                            </div>
                         </div>
                      </div>
