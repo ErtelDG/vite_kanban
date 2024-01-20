@@ -1,10 +1,16 @@
 <template>
    <div class="w-screen min-h-screen">
-      <div class="h-20"><Navbar></Navbar></div>
-      <div class="h-[calc(100vh-5rem)] lg:ml-64 lg:w-[calc(100vw-16rem)] w-screen bg-white dark:bg-gray-800">
-         <Sidebar></Sidebar>
-         <div class="w-full h-full p-4"><router-view> </router-view></div>
+      <div class="1xl:h-24 w-full z-20 absolute top-0 left-0 right-0 1xl:flex py-5 pr-10 pl-80 bg-white dark:bg-gray-800">
+         <Navbar></Navbar>
       </div>
+
+      <div
+         class="w-60 1xl:flex 1xl:h-screen bg-white dark:bg-gray-800 flex-col justify-between items-center flex-shrink-0 z-30 absolute left-0 top-0 bottom-0 hidden"
+      >
+         <Sidebar></Sidebar>
+      </div>
+
+      <div class="w-full 1xl:w-[calc(100%-15rem)] 1xl:min-h-screen pt-24 router_class absolute right-0 bottom-0 bg-gray-800"><router-view> </router-view></div>
    </div>
 </template>
 
@@ -55,3 +61,5 @@ onMounted(() => {
    });
 });
 </script>
+
+<style scoped></style>
