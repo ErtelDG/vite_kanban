@@ -1,6 +1,6 @@
 <template>
-   <div class="w-full h-full pl-20 flex flex-col justify-start pt-20">
-      <div class="text-black text-6xl font-bold leading-10">Add Task</div>
+   <div class="w-full h-full pl-16 flex flex-col justify-start pt-8">
+      <div class="text-black text-6xl font-bold">Add Task</div>
       <form class="flex mt-12 h-[26rem]">
          <div class="w-[27.5rem] h-full flex flex-col justify-between items-end">
             <div class="w-full flex-col justify-start items-start gap-2 inline-flex">

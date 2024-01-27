@@ -1,11 +1,11 @@
 <template>
-   <div class="w-full h-full pl-20 flex flex-col justify-center">
+   <div class="w-full h-full pl-16 pt-8 flex flex-col justify-start">
       <div class="flex justify-between items-center gap-7 w-40rem h-4_5rem">
          <div class="h-full w-64 font-bold text-6xl flex items-center p-2">Join 360</div>
          <div class="flex items-center border-b-2 bg-[#29ABE2] w-1 h-16"></div>
          <div class="h-full w-72 p-2 flex items-center text-2xl">Key Metrics at a Glance</div>
       </div>
-      <div class="mt-14 w-[64rem] flex items-center justify-between">
+      <div class="mt-12 w-[64rem] flex items-center justify-between">
          <div class="flex flex-col justify-between w-[35rem] h-[35rem]">
             <div class="w-full flex justify-between">
                <div class="w-[16.5rem] h-[10.5rem] flex justify-center items-center rounded-3xl bg-white">
@@ -19,7 +19,7 @@
                </div>
                <div class="w-[16.5rem] h-[10.5rem] flex justify-center items-center rounded-3xl bg-white">
                   <div class="w-[14.5rem] h-full gap-x-5 flex items-center justify-center">
-                     <div class="w-[4.5rem] h-[4.5rem] rounded-full bg-[#2A3647] flex justify-center items-center"><img src="../assets/check.svg" /></div>
+                     <div class="w-[4.5rem] h-[4.5rem] rounded-full bg-[#2A3647] flex justify-center items-center"><img src="../assets/check_board.svg" /></div>
                      <div class="flex flex-col items-center justify-center h-full">
                         <div class="text-[4rem] font-semibold">1</div>
                         <div class="text-center text-xl text-gray-700">Done</div>

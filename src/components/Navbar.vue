@@ -19,9 +19,9 @@
                tabindex="-1"
             >
                <div class="gap-y-2 text-white" role="none">
-                  <a href="#" class="block px-4 py-2 text-base w-full hover:bg-[#8895a5] rounded-t-md" role="menuitem" tabindex="-1" id="menu-item-0">Legal Notice</a>
-                  <a href="#" class="block px-4 py-2 text-base w-full hover:bg-[#8895a5]" role="menuitem" tabindex="-1" id="menu-item-1">Privacy Polic</a>
-                  <a href="#" class="block px-4 py-2 text-base w-full hover:bg-[#8895a5] rounded-b-md" role="menuitem" tabindex="-1" id="menu-item-2">Log out</a>
+                  <router-link to="/LegalNotice"  class="block px-4 py-2 text-base w-full hover:bg-[#8895a5] rounded-t-md" role="menuitem" tabindex="-1" id="menu-item-0">Legal Notice</router-link>
+                  <router-link to="/PrivacyPolicy"  class="block px-4 py-2 text-base w-full hover:bg-[#8895a5]" role="menuitem" tabindex="-1" id="menu-item-1">Privacy Polic</router-link>
+                  <router-link to="/"  class="block px-4 py-2 text-base w-full hover:bg-[#8895a5] rounded-b-md" role="menuitem" tabindex="-1" id="menu-item-2">Log out</router-link>
                </div>
             </div>
          </div>

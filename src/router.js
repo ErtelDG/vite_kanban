@@ -4,6 +4,8 @@ import Kanban from "./components/Kanban.vue";
 import Dashboard from "./components/Dashboard.vue";
 import AddTask from "./components/AddTask.vue";
 import Contacts from "./components/Contacts.vue";
+import PrivacyPolicy from "./components/PrivacyPolicy.vue";
+import LegalNotice from "./components/LegalNotice.vue";
 
 const routes = [
    {
@@ -25,6 +27,16 @@ const routes = [
       path: "/contacts",
       name: "Contacts",
       component: Contacts,
+   },
+   {
+      path: "/PrivacyPolicy",
+      name: "PrivacyPolicy",
+      component: PrivacyPolicy,
+   },
+   {
+      path: "/LegalNotice",
+      name: "LegalNotice",
+      component: LegalNotice,
    },
 ];
 
