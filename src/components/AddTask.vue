@@ -1,7 +1,7 @@
 <template>
    <div class="w-full h-full pl-16 flex flex-col justify-start pt-8">
       <div class="text-black text-6xl font-bold">Add Task</div>
-      <form class="flex mt-12 h-[26rem]">
+      <form class="flex mt-12 h-[26rem]" @submit.prevent="add_new_task">
          <div class="w-[27.5rem] h-full flex flex-col justify-between items-end">
             <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
                <div class="self-stretch">
@@ -10,9 +10,10 @@
                <div class="self-stretch h-16 flex-col justify-start items-start gap-1 flex">
                   <div class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-start items-center gap-2.5 inline-flex h-10">
                      <input
-                        v-model="title"
+                        v-model="add_title"
                         class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal outline-none"
                         placeholder="Enter a title"
+                        required
                      />
                   </div>
                   <div class="w-28 text-rose-400 text-xs font-normal leading-none" v-if="!title">This field is required</div>
@@ -23,9 +24,10 @@
                <div class="self-stretch h-32 flex-col justify-start items-start gap-1 flex">
                   <div class="self-stretch h-28 px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-start items-start gap-2.5 inline-flex">
                      <textarea
-                        v-model="description"
+                        v-model="add_description"
                         class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal outline-none h-full w-full"
                         placeholder="Enter a Description"
+                        required
                      ></textarea>
                      <div class="w-5 h-5 left-[26rem] top-24 absolute">
                         <div class="w-5 h-5 left-0 top-0 absolute"></div>
@@ -37,7 +39,7 @@
             <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
                <div class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal">Assigned to</div>
                <select
-                  v-model="assigned"
+                  v-model="add_assigned"
                   required
                   class="w-full px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex hover:cursor-pointer h-10"
                >
@@ -57,7 +59,7 @@
                </div>
                <div class="self-stretch h-16 flex-col justify-start items-start gap-1 flex">
                   <div class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex h-10">
-                     <input v-model="date" type="date" class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal outline-none" />
+                     <input v-model="add_date" type="date" class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal outline-none" required />
                   </div>
                   <div class="self-stretch text-rose-400 text-xs font-normal leading-none" v-if="!date">This field is required</div>
                </div>
@@ -65,7 +67,7 @@
             <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
                <div class="text-black text-xl font-normal leading-normal">Prio</div>
                <div class="flex justify-between w-full">
-                  <input v-bind="prio" type="radio" id="urgent" name="prio" value="Urgent" />
+                  <input v-on:change="updatePrio('Urgent')" type="radio" id="urgent" name="add_prio" value="Urgent" required />
                   <label
                      for="urgent"
                      class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 mr-2 hover:cursor-pointer"
@@ -73,7 +75,7 @@
                      <img src="../assets/prio_alta_red.svg" alt="" srcset=""
                   /></label>
 
-                  <input v-bind="prio" type="radio" id="medium" name="prio" value="Mediun" checked="checked" />
+                  <input v-on:change="updatePrio('Medium')" type="radio" id="medium" name="add_prio" value="Medium" />
                   <label
                      for="medium"
                      class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 mx-2 hover:cursor-pointer"
@@ -81,7 +83,7 @@
                      <img src="../assets/prio_media_white.svg" alt="" srcset=""
                   /></label>
 
-                  <input v-bind="prio" type="radio" id="low" name="prio" value="Low" />
+                  <input v-on:change="updatePrio('Low')" type="radio" id="low" name="prio" value="Low" />
                   <label
                      for="low"
                      class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
@@ -94,7 +96,7 @@
             <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
                <div class="w-full grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal">Category</div>
                <select
-                  v-model="category"
+                  v-model="add_category"
                   required
                   class="w-full px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex hover:cursor-pointer h-10"
                >
@@ -110,17 +112,21 @@
             </div>
             <div class="h-14 flex justify-end items-center gap-4">
                <div
+                  @click="clear_input"
                   class="w-28 h-full p-4 bg-neutral-100 rounded-lg border border-gray-700 justify-center items-center gap-1 flex hover:cursor-pointer hover:bg-[#d1d5db]"
                >
                   <div class="text-gray-700 text-xl font-normal leading-normal">Clear</div>
                   <div class="w-6 h-6 relative"><img src="../assets/iconoir_cancel.svg" alt="" srcset="" /></div>
                </div>
-               <div class="h-full p-4 bg-gray-700 rounded-lg justify-center items-center gap-1 flex w-48 hover:bg-gray-600 hover:cursor-pointer">
+               <button
+                  type="submit"
+                  class="h-full p-4 bg-gray-700 rounded-lg justify-center items-center gap-1 flex w-48 hover:bg-gray-600 hover:cursor-pointer"
+               >
                   <div class="w-32 text-white text-xl font-normal leading-relaxed">Create Task</div>
                   <div class="w-6 h-6 relative">
                      <div class="w-6 h-6 left-0 top-0 absolute"><img src="../assets/check.svg" alt="" srcset="" /></div>
                   </div>
-               </div>
+               </button>
             </div>
          </div>
       </form>
@@ -128,14 +134,39 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { useStore } from "vuex";
+import { computed, ref } from "vue";
 
-const title = ref("");
-const description = ref("");
-const assigned = ref("");
-const prio = ref("");
-const date = ref("");
-const category = ref("");
+const add_title = ref("");
+const add_description = ref("");
+const add_assigned = ref("");
+const add_prio = ref("Medium");
+const add_date = ref("");
+const add_category = ref("");
+
+const store = useStore();
+
+const clear_input = () => {
+   add_title.value = "";
+   add_description.value = "";
+   add_assigned.value = "";
+   add_prio.value = "Medium";
+   add_date.value = "";
+   add_category.value = "";
+};
+
+const add_new_task = () => {
+   alert(add_title.value);
+   alert(add_description.value);
+   alert(add_assigned.value);
+   alert(add_prio.value);
+   alert(add_date.value);
+   alert(add_category.value);
+};
+
+const updatePrio = (value) => {
+   add_prio.value = value;
+};
 </script>
 
 <style scoped>

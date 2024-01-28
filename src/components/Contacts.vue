@@ -5,7 +5,8 @@
    <div class="w-full h-full pl-16 pt-8 pb-8">
       <div class="w-[70rem] h-full">
          <div class="w-full flex justify-between items-center py-2">
-            <button v-on:click="SlideNewContactActive = !SlideNewContactActive"
+            <button
+               @click="toggleSlideNewContact"
                class="w-80 py-3 bg-gray-700 rounded-lg border border-gray-700 justify-center items-center gap-4 inline-flex hover:bg-gray-600 hover:cursor-pointer"
             >
                <div class="text-white text-xl font-bold leading-relaxed">Add new contact</div>
@@ -91,10 +92,15 @@
 </template>
 <script setup>
 import SlideNewContact from "./SlideNewContact.vue";
+import { useStore } from "vuex";
+import { computed } from "vue";
 
-import { ref } from "vue";
+const store = useStore();
+const SlideNewContactActive = computed(() => store.state.SlideNewContactActive);
 
-const SlideNewContactActive = ref(false);
+const toggleSlideNewContact = () => {
+   store.commit("toggleSlideNewContact");
+};
 </script>
 
 <style scoped>

@@ -1,4 +1,7 @@
 <template>
+   <div class="w-full h-full z-50 absolute top-0 left-0" v-if="SlideNewTaskActive">
+      <SlideNewTask></SlideNewTask>
+   </div>
    <div class="w-full h-full pl-16 flex flex-col justify-start pt-8">
       <div class="w-[70rem] flex items-center justify-between">
          <div class="text-black text-6xl font-bold flex items-center justify-center">Board</div>
@@ -23,15 +26,14 @@
                   </div>
                </div>
             </div>
-            <router-link
-               to="/addtask"
+            <div @click="toggleSlideNewTask"
                class="w-40 pl-3 pr-1 py-2 bg-gray-700 rounded-lg border border-gray-700 justify-center items-center gap-2 inline-flex hover:bg-gray-600 hover:cursor-pointer"
             >
                <div class="w-24 h-full text-white text-xl font-bold leading-relaxed flex items-center">Add task</div>
                <div class="w-8 h-8 flex justify-center items-center">
                   <div class="w-full h-full flex justify-center items-center"><img src="../assets/add.svg" alt="" srcset="" /></div>
                </div>
-            </router-link>
+            </div>
          </div>
       </div>
       <div class="w-[70rem] mt-12 mb-8 h-full flex justify-between">
@@ -150,11 +152,21 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import SlideNewTask from "./SlideNewTask.vue";
+import { useStore } from "vuex";
+import { computed } from "vue";
 
 const searchTask = ref("");
 
 const inputSubtask = ref("");
 const listSubtasks = ref([]);
+
+const store = useStore();
+const SlideNewTaskActive = computed(() => store.state.SlideNewTaskActive);
+
+const toggleSlideNewTask = () => {
+   store.commit("toggleSlideNewTask");
+};
 
 function addSubtask() {
    listSubtasks.value.push(inputSubtask.value);
