@@ -1,7 +1,4 @@
 <template>
-   <div class="w-full h-full z-50 absolute top-0 left-0" v-if="SlideNewTaskActive">
-      <SlideNewTask></SlideNewTask>
-   </div>
    <div class="w-full h-full pl-16 flex flex-col justify-start pt-8">
       <div class="w-[70rem] flex items-center justify-between">
          <div class="text-black text-6xl font-bold flex items-center justify-center">Board</div>
@@ -26,7 +23,8 @@
                   </div>
                </div>
             </div>
-            <div @click="toggleSlideNewTask"
+            <div
+               @click="toggleSlideNewTask"
                class="w-40 pl-3 pr-1 py-2 bg-gray-700 rounded-lg border border-gray-700 justify-center items-center gap-2 inline-flex hover:bg-gray-600 hover:cursor-pointer"
             >
                <div class="w-24 h-full text-white text-xl font-bold leading-relaxed flex items-center">Add task</div>
@@ -123,6 +121,12 @@
          </div>
       </div>
    </div>
+   <div class="w-full h-full z-50 absolute top-0 left-0" v-if="SlideNewTaskActive">
+      <SlideNewTask></SlideNewTask>
+   </div>
+   <div class="w-full h-full z-50 absolute top-0 left-0" v-if="SlideCurrentTaskActive">
+      <SlideCurrentTask></SlideCurrentTask>
+   </div>
    <!--  <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
       <div class="self-stretch">
          <span class="text-gray-700 text-xl font-normal leading-normal h-10">Subtasks</span>
@@ -151,8 +155,10 @@
    </div> -->
 </template>
 <script setup>
-import { ref } from "vue";
 import SlideNewTask from "./SlideNewTask.vue";
+import SlideCurrentTask from "./SlideCurrentTask.vue";
+
+import { ref } from "vue";
 import { useStore } from "vuex";
 import { computed } from "vue";
 
@@ -163,9 +169,14 @@ const listSubtasks = ref([]);
 
 const store = useStore();
 const SlideNewTaskActive = computed(() => store.state.SlideNewTaskActive);
+const SlideCurrentTaskActive = computed(() => store.state.SlideCurrentTaskActive);
 
 const toggleSlideNewTask = () => {
    store.commit("toggleSlideNewTask");
+};
+
+const toggleSlideCurrentTask = () => {
+   store.commit("toggleSlideCurrentTask");
 };
 
 function addSubtask() {

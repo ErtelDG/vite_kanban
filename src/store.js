@@ -5,6 +5,7 @@ export default createStore({
    state: {
       SlideNewContactActive: false,
       SlideNewTaskActive: false,
+      SlideCurrentTaskActive: true,
    },
    mutations: {
       toggleSlideNewContact(state) {
@@ -12,6 +13,9 @@ export default createStore({
       },
       toggleSlideNewTask(state) {
          state.SlideNewTaskActive == true ? (state.SlideNewTaskActive = false) : (state.SlideNewTaskActive = true);
+      },
+      toggleSlideCurrentTask(state) {
+         state.SlideCurrentTaskActive == true ? (state.SlideCurrentTaskActive = false) : (state.SlideCurrentTaskActive = true);
       },
    },
    actions: {
