@@ -1,3 +1,46 @@
+<script setup>
+import { useStore } from "vuex";
+import { computed, ref } from "vue";
+
+const store_contacts = computed(() => store.state.contacts);
+const store_categories = computed(() => store.state.categories);
+
+const add_title = ref("");
+const add_description = ref("");
+const add_assigned = ref("");
+const add_prio = ref("Medium");
+const add_date = ref("");
+const add_category = ref("");
+
+const store = useStore();
+
+const clear_input = () => {
+   add_title.value = "";
+   add_description.value = "";
+   add_assigned.value = "";
+   add_prio.value = "";
+   add_date.value = "";
+   add_category.value = "";
+};
+
+const add_new_task = () => {
+   const newTask = {
+      title: add_title.value,
+      description: add_description.value,
+      assigned: add_assigned.value,
+      prio: add_prio.value,
+      due_date: add_date.value,
+      category: add_category.value,
+      subtasks: [],
+   };
+   console.log("Created Task:", newTask);
+};
+
+const updatePrio = (value) => {
+   add_prio.value = value;
+};
+</script>
+
 <template>
    <div class="w-full h-full pl-16 flex flex-col justify-start pt-8">
       <div class="text-black text-6xl font-bold">Add Task</div>
@@ -16,7 +59,7 @@
                         required
                      />
                   </div>
-                  <div class="w-28 text-rose-400 text-xs font-normal leading-none" v-if="!title">This field is required</div>
+                  <div class="w-28 text-rose-400 text-xs font-normal leading-none" v-if="!add_title">This field is required</div>
                </div>
             </div>
             <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
@@ -33,7 +76,7 @@
                         <div class="w-5 h-5 left-0 top-0 absolute"></div>
                      </div>
                   </div>
-                  <div class="self-stretch text-rose-400 text-xs font-normal leading-none" v-if="!description">This field is required</div>
+                  <div class="self-stretch text-rose-400 text-xs font-normal leading-none" v-if="!add_description">This field is required</div>
                </div>
             </div>
             <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
@@ -45,9 +88,9 @@
                >
                   <option label="Select contact to assign" class="text-[#9CA3AF] text-xl font-normal leading-normal"></option>
 
-                  <option value="Assignment_1" id="assigned-0">Assignment 1</option>
-                  <option value="Assignment_2" id="assigned-1">Assignment 2</option>
-                  <option value="Assignment_3" id="assigned-2">Assignment 3</option>
+                  <option class="text-lg font-normal" v-for="(contact, id) in store_contacts" :key="id" :value="id" id="assigned-0">
+                     {{ contact.last_name }}, {{ contact.first_name }} <input type="hidden" />
+                  </option>
                </select>
             </div>
          </div>
@@ -58,10 +101,10 @@
                   <span class="text-gray-700 text-xl font-normal leading-normal">Due date</span>
                </div>
                <div class="self-stretch h-16 flex-col justify-start items-start gap-1 flex">
-                  <div class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex h-10">
-                     <input v-model="add_date" type="date" class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal outline-none" required />
+                  <div class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex h-10 relative">
+                     <input v-model="add_date" type="date" class="text-gray-700 text-xl font-normal leading-normal outline-none" required />
                   </div>
-                  <div class="self-stretch text-rose-400 text-xs font-normal leading-none" v-if="!date">This field is required</div>
+                  <div class="self-stretch text-rose-400 text-xs font-normal leading-none" v-if="!add_date">This field is required</div>
                </div>
             </div>
             <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
@@ -70,7 +113,8 @@
                   <input v-on:change="updatePrio('Urgent')" type="radio" id="urgent" name="add_prio" value="Urgent" required />
                   <label
                      for="urgent"
-                     class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 mr-2 hover:cursor-pointer"
+                     :style="{ backgroundColor: add_prio === 'Urgent' ? 'lightgrey' : '' }"
+                     class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 w-full py-1 grow shrink basis-0 rounded-lg shadow gap-2 mr-2 hover:cursor-pointer"
                      ><div>Urgent</div>
                      <img src="../assets/prio_alta_red.svg" alt="" srcset=""
                   /></label>
@@ -78,14 +122,16 @@
                   <input v-on:change="updatePrio('Medium')" type="radio" id="medium" name="add_prio" value="Medium" />
                   <label
                      for="medium"
+                     :style="{ backgroundColor: add_prio === 'Medium' ? 'lightgrey' : '' }"
                      class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 mx-2 hover:cursor-pointer"
                      ><div>Medium</div>
                      <img src="../assets/prio_media_white.svg" alt="" srcset=""
                   /></label>
 
-                  <input v-on:change="updatePrio('Low')" type="radio" id="low" name="prio" value="Low" />
+                  <input v-on:change="updatePrio('Low')" type="radio" id="low" name="add_prio" value="Low" />
                   <label
                      for="low"
+                     :style="{ backgroundColor: add_prio === 'Low' ? 'lightgrey' : '' }"
                      class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
                      ><div>Low</div>
                      <img src="../assets/prio_low_green.svg" alt="" srcset=""
@@ -102,11 +148,7 @@
                >
                   <option label="Select task category" class="text-[#9CA3AF] text-xl font-normal leading-normal"></option>
 
-                  <option id="category-0">Requirements Analysis</option>
-                  <option id="category-1">Software Design and Prototyping</option>
-                  <option id="category-2">Implementation and Coding</option>
-                  <option id="category-3">Software Testing</option>
-                  <option id="category-4">Maintenance and Support</option>
+                  <option class="text-lg font-normal" v-for="(category, id) in store_categories" :key="id" :value="id">{{ category }}</option>
                </select>
                <div class="w-full h-3"></div>
             </div>
@@ -133,42 +175,6 @@
    </div>
 </template>
 
-<script setup>
-import { useStore } from "vuex";
-import { computed, ref } from "vue";
-
-const add_title = ref("");
-const add_description = ref("");
-const add_assigned = ref("");
-const add_prio = ref("Medium");
-const add_date = ref("");
-const add_category = ref("");
-
-const store = useStore();
-
-const clear_input = () => {
-   add_title.value = "";
-   add_description.value = "";
-   add_assigned.value = "";
-   add_prio.value = "Medium";
-   add_date.value = "";
-   add_category.value = "";
-};
-
-const add_new_task = () => {
-   alert(add_title.value);
-   alert(add_description.value);
-   alert(add_assigned.value);
-   alert(add_prio.value);
-   alert(add_date.value);
-   alert(add_category.value);
-};
-
-const updatePrio = (value) => {
-   add_prio.value = value;
-};
-</script>
-
 <style scoped>
 input[type="date"]::-webkit-calendar-picker-indicator {
    background: transparent;
@@ -185,9 +191,5 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="radio"] {
    visibility: hidden;
    width: 0;
-}
-
-input[type="radio"]:checked + label {
-   background-color: #d1d5db;
 }
 </style>

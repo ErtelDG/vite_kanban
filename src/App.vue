@@ -16,13 +16,19 @@
 
 <script setup>
 import { onMounted } from "vue";
+import { useStore } from "vuex";
 import Navbar from "./components/Navbar.vue";
 import Sidebar from "./components/Sidebar.vue";
+
+const store = useStore();
 
 onMounted(() => {
    alert(
       "Information / please note: This site is still under development. Technologies used: VueJS for the frontend. Golang for backend. Tailwind CSS for the design."
    );
+   store.dispatch("fetchData", "contacts");
+   store.dispatch("fetchData", "categories");
+   store.dispatch("fetchData", "tasks");
 });
 </script>
 

@@ -32,7 +32,7 @@
                   <img src="../assets/person_slider_add_contact.svg" alt="" srcset="" />
                </div>
             </div>
-            <div class="flex flex-col justify-center w-full gap-y-8">
+            <div class="flex flex-col justify-center w-full gap-y-2">
                <div class="w-full">
                   <div class="h-12 px-6 py-1 bg-white rounded-lg border border-neutral-300 flex justify-between items-center gap-2.5">
                      <input
@@ -41,8 +41,8 @@
                         id=""
                         required
                         class="outline-none text-gray-700 text-xl font-normal leading-normal w-full"
-                        v-model="add_contact_name"
-                        placeholder="Name"
+                        v-model="add_cont_last_name"
+                        placeholder="Last name"
                      />
 
                      <div class="w-6 h-6 relative">
@@ -51,8 +51,30 @@
                         </div>
                      </div>
                   </div>
-                  <div class="w-full h-6 pl-4 pt-2 text-rose-400 text-xs font-normal leading-none">
-                     <div v-if="!add_contact_name">This field is required</div>
+                  <div class="w-full h-4 pl-4 flex items-center text-rose-400 text-xs font-normal leading-none">
+                     <div v-if="!add_cont_last_name">This field is required</div>
+                  </div>
+               </div>
+               <div class="w-full">
+                  <div class="h-12 px-6 py-1 bg-white rounded-lg border border-neutral-300 flex justify-between items-center gap-2.5">
+                     <input
+                        type="text"
+                        name=""
+                        id=""
+                        required
+                        class="outline-none text-gray-700 text-xl font-normal leading-normal w-full"
+                        v-model="add_cont_first_name"
+                        placeholder="First name"
+                     />
+
+                     <div class="w-6 h-6 relative">
+                        <div class="w-6 h-6 flex justify-center items-center absolute">
+                           <img src="../assets/person_slider_add_contact_small.svg" alt="" srcset="" />
+                        </div>
+                     </div>
+                  </div>
+                  <div class="w-full h-4 pl-4 flex items-center text-rose-400 text-xs font-normal leading-none">
+                     <div v-if="!add_cont_first_name">This field is required</div>
                   </div>
                </div>
                <div class="w-full">
@@ -63,7 +85,7 @@
                         id=""
                         required
                         class="outline-none text-gray-700 text-xl font-normal leading-normal w-full"
-                        v-model="add_contact_email"
+                        v-model="add_cont_email"
                         placeholder="Email"
                      />
 
@@ -73,8 +95,8 @@
                         </div>
                      </div>
                   </div>
-                  <div class="w-full h-6 pl-4 pt-2 text-rose-400 text-xs font-normal leading-none">
-                     <div v-if="!add_contact_email">This field is required</div>
+                  <div class="w-full h-4 pl-4 flex items-center text-rose-400 text-xs font-normal leading-none">
+                     <div v-if="!add_cont_email">This field is required</div>
                   </div>
                </div>
                <div class="w-full">
@@ -85,7 +107,7 @@
                         id=""
                         required
                         class="outline-none text-gray-700 text-xl font-normal leading-normal w-full"
-                        v-model="add_contact_phone"
+                        v-model="add_cont_phone"
                         placeholder="Phone"
                      />
 
@@ -95,8 +117,8 @@
                         </div>
                      </div>
                   </div>
-                  <div class="w-full h-6 pl-4 pt-2 text-rose-400 text-xs font-normal leading-none">
-                     <div v-if="!add_contact_phone">This field is required</div>
+                  <div class="w-full h-4 pl-4 flex items-center text-rose-400 text-xs font-normal leading-none">
+                     <div v-if="!add_cont_phone">This field is required</div>
                   </div>
                </div>
             </div>
@@ -130,9 +152,10 @@
 import { useStore } from "vuex";
 import { computed, ref } from "vue";
 
-const add_contact_email = ref("");
-const add_contact_name = ref("");
-const add_contact_phone = ref("");
+const add_cont_email = ref("");
+const add_cont_last_name = ref("");
+const add_cont_first_name = ref("");
+const add_cont_phone = ref("");
 const store = useStore();
 const closeSlider = ref(false);
 
@@ -146,9 +169,13 @@ const toggleSlideNewContact = () => {
 };
 
 const add_new_contact = () => {
-   alert(add_contact_email.value);
-   alert(add_contact_name.value);
-   alert(add_contact_phone.value);
+   const newContact = {
+      first_name: add_cont_first_name.value,
+      last_name: add_cont_last_name.value,
+      email: add_cont_email.value,
+      phone: add_cont_phone.value,
+   };
+   console.log(newContact);
    closeSlider.value = true;
    toggleSlideNewContact();
 };
