@@ -23,8 +23,8 @@ const clear_input = () => {
    add_category.value = "";
 };
 
-const add_new_task = () => {
-   const newTask = {
+const add_new_task = async () => {
+   const newTask = JSON.stringify({
       title: add_title.value,
       description: add_description.value,
       assigned: add_assigned.value,
@@ -32,7 +32,20 @@ const add_new_task = () => {
       due_date: add_date.value,
       category: add_category.value,
       subtasks: [],
+   });
+
+   const requestOptions = {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: newTask,
    };
+
+   await fetch("http://localhost:8080/add_task", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+   store.dispatch("fetchData", "tasks");
    console.log("Created Task:", newTask);
 };
 
@@ -110,7 +123,7 @@ const updatePrio = (value) => {
             <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
                <div class="text-black text-xl font-normal leading-normal">Prio</div>
                <div class="flex justify-between w-full">
-                  <input v-on:change="updatePrio('Urgent')" type="radio" id="urgent" name="add_prio" value="Urgent" required />
+                  <input v-on:change="updatePrio('Urgent')" type="radio" id="urgent" value="Urgent" required />
                   <label
                      for="urgent"
                      :style="{ backgroundColor: add_prio === 'Urgent' ? 'lightgrey' : '' }"
@@ -119,7 +132,7 @@ const updatePrio = (value) => {
                      <img src="../assets/prio_alta_red.svg" alt="" srcset=""
                   /></label>
 
-                  <input v-on:change="updatePrio('Medium')" type="radio" id="medium" name="add_prio" value="Medium" />
+                  <input v-on:change="updatePrio('Medium')" type="radio" id="medium" value="Medium" />
                   <label
                      for="medium"
                      :style="{ backgroundColor: add_prio === 'Medium' ? 'lightgrey' : '' }"
@@ -128,7 +141,7 @@ const updatePrio = (value) => {
                      <img src="../assets/prio_media_white.svg" alt="" srcset=""
                   /></label>
 
-                  <input v-on:change="updatePrio('Low')" type="radio" id="low" name="add_prio" value="Low" />
+                  <input v-on:change="updatePrio('Low')" type="radio" id="low" value="Low" />
                   <label
                      for="low"
                      :style="{ backgroundColor: add_prio === 'Low' ? 'lightgrey' : '' }"

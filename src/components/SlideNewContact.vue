@@ -168,14 +168,27 @@ const toggleSlideNewContact = () => {
    }, 1500);
 };
 
-const add_new_contact = () => {
-   const newContact = {
+const add_new_contact = async () => {
+   const newContact = JSON.stringify({
       first_name: add_cont_first_name.value,
       last_name: add_cont_last_name.value,
       email: add_cont_email.value,
       phone: add_cont_phone.value,
+   });
+
+   const requestOptions = {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: newContact,
    };
-   console.log(newContact);
+
+   await fetch("http://localhost:8080/add_contact", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+
+   store.dispatch("fetchData", "contacts");
    closeSlider.value = true;
    toggleSlideNewContact();
 };
