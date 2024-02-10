@@ -2,6 +2,8 @@
 import { useStore } from "vuex";
 import { computed, ref } from "vue";
 
+const store = useStore();
+
 const store_contacts = computed(() => store.state.contacts);
 const store_categories = computed(() => store.state.categories);
 
@@ -11,8 +13,6 @@ const add_assigned = ref("");
 const add_prio = ref("Medium");
 const add_date = ref("");
 const add_category = ref("");
-
-const store = useStore();
 
 const clear_input = () => {
    add_title.value = "";
@@ -25,6 +25,7 @@ const clear_input = () => {
 
 const add_new_task = async () => {
    const newTask = JSON.stringify({
+      status: "ToDo",
       title: add_title.value,
       description: add_description.value,
       assigned: add_assigned.value,
@@ -46,6 +47,8 @@ const add_new_task = async () => {
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
    store.dispatch("fetchData", "tasks");
+   clear_input();
+   add_prio.value = "Medium";
    console.log("Created Task:", newTask);
 };
 

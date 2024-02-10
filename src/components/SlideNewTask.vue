@@ -52,9 +52,9 @@
                   >
                      <option label="Select contact to assign" class="text-[#9CA3AF] text-xl font-normal leading-normal"></option>
 
-                     <option value="Assignment_1" id="assigned-0">Assignment 1</option>
-                     <option value="Assignment_2" id="assigned-1">Assignment 2</option>
-                     <option value="Assignment_3" id="assigned-2">Assignment 3</option>
+                     <option class="text-lg font-normal" v-for="(contact, id) in store_contacts" :key="id" :value="id" id="assigned-0">
+                        {{ contact.last_name }}, {{ contact.first_name }} <input type="hidden" />
+                     </option>
                   </select>
                </div>
             </div>
@@ -65,13 +65,8 @@
                      <span class="text-gray-700 text-xl font-normal leading-normal">Due date</span>
                   </div>
                   <div class="self-stretch h-16 flex-col justify-start items-start gap-1 flex">
-                     <div class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex h-10">
-                        <input
-                           v-model="add_date"
-                           type="date"
-                           class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal outline-none"
-                           required
-                        />
+                     <div class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex h-10 relative">
+                        <input v-model="add_date" type="date" class="text-gray-700 text-xl font-normal leading-normal outline-none" required />
                      </div>
                      <div class="self-stretch text-rose-400 text-xs font-normal leading-none" v-if="!add_date">This field is required</div>
                   </div>
@@ -79,25 +74,28 @@
                <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
                   <div class="text-black text-xl font-normal leading-normal">Prio</div>
                   <div class="flex justify-between w-full">
-                     <input v-on:change="updatePrio('Urgent')" type="radio" id="urgent" name="add_prio" value="Urgent" required />
+                     <input v-on:change="updatePrio('Urgent')" type="radio" id="urgent" value="Urgent" required />
                      <label
                         for="urgent"
-                        class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 mr-2 hover:cursor-pointer"
+                        :style="{ backgroundColor: add_prio === 'Urgent' ? 'lightgrey' : '' }"
+                        class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 w-full py-1 grow shrink basis-0 rounded-lg shadow gap-2 mr-2 hover:cursor-pointer"
                         ><div>Urgent</div>
                         <img src="../assets/prio_alta_red.svg" alt="" srcset=""
                      /></label>
 
-                     <input v-on:change="updatePrio('Medium')" type="radio" id="medium" name="add_prio" value="Medium" />
+                     <input v-on:change="updatePrio('Medium')" type="radio" id="medium" value="Medium" />
                      <label
                         for="medium"
+                        :style="{ backgroundColor: add_prio === 'Medium' ? 'lightgrey' : '' }"
                         class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 mx-2 hover:cursor-pointer"
                         ><div>Medium</div>
                         <img src="../assets/prio_media_white.svg" alt="" srcset=""
                      /></label>
 
-                     <input v-on:change="updatePrio('Low')" type="radio" id="low" name="prio" value="Low" />
+                     <input v-on:change="updatePrio('Low')" type="radio" id="low" value="Low" />
                      <label
                         for="low"
+                        :style="{ backgroundColor: add_prio === 'Low' ? 'lightgrey' : '' }"
                         class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
                         ><div>Low</div>
                         <img src="../assets/prio_low_green.svg" alt="" srcset=""
@@ -114,11 +112,7 @@
                   >
                      <option label="Select task category" class="text-[#9CA3AF] text-xl font-normal leading-normal"></option>
 
-                     <option id="category-0">Requirements Analysis</option>
-                     <option id="category-1">Software Design and Prototyping</option>
-                     <option id="category-2">Implementation and Coding</option>
-                     <option id="category-3">Software Testing</option>
-                     <option id="category-4">Maintenance and Support</option>
+                     <option class="text-lg font-normal" v-for="(category, id) in store_categories" :key="id" :value="id">{{ category }}</option>
                   </select>
                   <div class="w-full h-3"></div>
                </div>
@@ -150,6 +144,11 @@
 import { useStore } from "vuex";
 import { computed, ref } from "vue";
 
+const store = useStore();
+
+const store_contacts = computed(() => store.state.contacts);
+const store_categories = computed(() => store.state.categories);
+
 const add_title = ref("");
 const add_description = ref("");
 const add_assigned = ref("");
@@ -159,17 +158,42 @@ const add_category = ref("");
 
 const closeSlider = ref(false);
 
-const store = useStore();
+const clear_input = () => {
+   add_title.value = "";
+   add_description.value = "";
+   add_assigned.value = "";
+   add_prio.value = "";
+   add_date.value = "";
+   add_category.value = "";
+};
 
-const add_new_task = () => {
-   alert(add_title.value);
-   alert(add_description.value);
-   alert(add_assigned.value);
-   alert(add_prio.value);
-   alert(add_date.value);
-   alert(add_category.value);
-   closeSlider.value = true;
+const add_new_task = async () => {
+   const newTask = JSON.stringify({
+      status: "ToDo",
+      title: add_title.value,
+      description: add_description.value,
+      assigned: add_assigned.value,
+      prio: add_prio.value,
+      due_date: add_date.value,
+      category: add_category.value,
+      subtasks: [],
+   });
+
+   const requestOptions = {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: newTask,
+   };
+
+   await fetch("http://localhost:8080/add_task", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+   store.dispatch("fetchData", "tasks");
    toggleSlideNewTask();
+   add_prio.value = "Medium";
+   console.log("Created Task:", newTask);
 };
 
 const updatePrio = (value) => {
@@ -181,6 +205,7 @@ const toggleSlideNewTask = () => {
    setTimeout(() => {
       store.commit("toggleSlideNewTask");
    }, 1500);
+   clear_input();
 };
 </script>
 
@@ -263,7 +288,16 @@ input[type="radio"] {
    width: 0;
 }
 
-input[type="radio"]:checked + label {
-   background-color: #d1d5db;
+input[type="date"]::-webkit-calendar-picker-indicator {
+   background: transparent;
+   bottom: 0;
+   color: transparent;
+   cursor: pointer;
+   height: auto;
+   left: 0;
+   position: absolute;
+   right: 0;
+   top: 0;
+   width: auto;
 }
 </style>

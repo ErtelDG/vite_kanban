@@ -2,6 +2,7 @@
    <div class="w-full h-full z-50 absolute top-0 left-0" v-if="SlideNewContactActive">
       <SlideNewContact></SlideNewContact>
    </div>
+
    <div class="w-full h-full pl-16 pt-8 pb-8">
       <div class="w-[70rem] h-full">
          <div class="w-full flex justify-between items-center py-2">
@@ -20,69 +21,29 @@
                <div class="text-gray-700 text-2xl font-normal leading-loose">Better with a team</div>
             </div>
          </div>
-         <div class="w-full flex flex-col">
+         <div class="w-full flex flex-col" v-for="(alpha, letter) in render_contacts" :ref="letter">
             <div class="w-full h-14 px-9 py-4 flex-col justify-center items-start gap-2 inline-flex border-b-2 border-[#D1D1D1] rounded-sm">
-               <div class="text-black text-xl font-normal leading-normal">A</div>
+               <div class="text-black text-xl font-normal leading-normal">{{ letter }}</div>
             </div>
             <div class="w-full p-3 flexbox">
-               <div class="w-80 h-20 px-6 py-3.5 bg-white rounded-lg justify-start items-start gap-9 inline-flex hover:cursor-pointer hover:bg-slate-100">
-                  <div class="bg-white rounded-3xl justify-center items-center gap-2.5 flex">
-                     <div class="w-10 h-10 relative">
-                        <div class="w-10 h-10 left-0 top-0 absolute bg-purple-600 rounded-full border-2 border-white"></div>
-                        <div class="w-7 h-2.5 left-[7px] top-[16px] absolute text-center text-white text-xs font-normal font-['Inter'] leading-none">AS</div>
+               <div v-for="contacts in alpha">
+                  <div
+                     class="w-80 h-20 px-6 py-3.5 bg-white rounded-lg justify-start items-center gap-9 inline-flex hover:cursor-pointer hover:bg-slate-100 shadow-sm"
+                     v-for="contact in contacts"
+                  >
+                     <div class="bg-white rounded-3xl justify-center items-center gap-2.5 flex">
+                        <div class="w-10 h-10">
+                           <div class="w-10 h-10 rounded-full border-2 border-white flex justify-center items-center bg-blue-600">
+                              <div class="text-white text-xs font-normal flex justify-center items-center">
+                                 {{ contact["first_name"].substring(0, 1) }}{{ contact["last_name"].substring(0, 1) }}
+                              </div>
+                           </div>
+                        </div>
                      </div>
-                  </div>
-                  <div class="flex-col justify-start items-start gap-1 inline-flex">
-                     <div class="text-black text-xl font-normal font-['Inter'] leading-normal">Anja Schulz</div>
-                     <div class="text-sky-600 text-base font-normal font-['Inter'] leading-tight">schulz@hotmail.com</div>
-                  </div>
-               </div>
-               <div class="w-80 h-20 px-6 py-3.5 bg-white rounded-lg justify-start items-start gap-9 inline-flex hover:cursor-pointer hover:bg-slate-100">
-                  <div class="bg-white rounded-3xl justify-center items-center gap-2.5 flex">
-                     <div class="w-10 h-10 relative">
-                        <div class="w-10 h-10 left-0 top-0 absolute bg-purple-600 rounded-full border-2 border-white"></div>
-                        <div class="w-7 h-2.5 left-[7px] top-[16px] absolute text-center text-white text-xs font-normal font-['Inter'] leading-none">AS</div>
+                     <div class="flex-col justify-start items-start gap-1 inline-flex">
+                        <div class="text-black text-xl font-normal leading-normal">{{ contact["first_name"] }} {{ contact["last_name"] }}</div>
+                        <div class="text-sky-600 text-base font-normal leading-tight">{{ contact["email"] }}</div>
                      </div>
-                  </div>
-                  <div class="flex-col justify-start items-start gap-1 inline-flex">
-                     <div class="text-black text-xl font-normal font-['Inter'] leading-normal">Anja Schulz</div>
-                     <div class="text-sky-600 text-base font-normal font-['Inter'] leading-tight">schulz@hotmail.com</div>
-                  </div>
-               </div>
-               <div class="w-80 h-20 px-6 py-3.5 bg-white rounded-lg justify-start items-start gap-9 inline-flex hover:cursor-pointer hover:bg-slate-100">
-                  <div class="bg-white rounded-3xl justify-center items-center gap-2.5 flex">
-                     <div class="w-10 h-10 relative">
-                        <div class="w-10 h-10 left-0 top-0 absolute bg-purple-600 rounded-full border-2 border-white"></div>
-                        <div class="w-7 h-2.5 left-[7px] top-[16px] absolute text-center text-white text-xs font-normal font-['Inter'] leading-none">AS</div>
-                     </div>
-                  </div>
-                  <div class="flex-col justify-start items-start gap-1 inline-flex">
-                     <div class="text-black text-xl font-normal font-['Inter'] leading-normal">Anja Schulz</div>
-                     <div class="text-sky-600 text-base font-normal font-['Inter'] leading-tight">schulz@hotmail.com</div>
-                  </div>
-               </div>
-               <div class="w-80 h-20 px-6 py-3.5 bg-white rounded-lg justify-start items-start gap-9 inline-flex hover:cursor-pointer hover:bg-slate-100">
-                  <div class="bg-white rounded-3xl justify-center items-center gap-2.5 flex">
-                     <div class="w-10 h-10 relative">
-                        <div class="w-10 h-10 left-0 top-0 absolute bg-purple-600 rounded-full border-2 border-white"></div>
-                        <div class="w-7 h-2.5 left-[7px] top-[16px] absolute text-center text-white text-xs font-normal font-['Inter'] leading-none">AS</div>
-                     </div>
-                  </div>
-                  <div class="flex-col justify-start items-start gap-1 inline-flex">
-                     <div class="text-black text-xl font-normal font-['Inter'] leading-normal">Anja Schulz</div>
-                     <div class="text-sky-600 text-base font-normal font-['Inter'] leading-tight">schulz@hotmail.com</div>
-                  </div>
-               </div>
-               <div class="w-80 h-20 px-6 py-3.5 bg-white rounded-lg justify-start items-start gap-9 inline-flex hover:cursor-pointer hover:bg-slate-100">
-                  <div class="bg-white rounded-3xl justify-center items-center gap-2.5 flex">
-                     <div class="w-10 h-10 relative">
-                        <div class="w-10 h-10 left-0 top-0 absolute bg-purple-600 rounded-full border-2 border-white"></div>
-                        <div class="w-7 h-2.5 left-[7px] top-[16px] absolute text-center text-white text-xs font-normal font-['Inter'] leading-none">AS</div>
-                     </div>
-                  </div>
-                  <div class="flex-col justify-start items-start gap-1 inline-flex">
-                     <div class="text-black text-xl font-normal font-['Inter'] leading-normal">Anja Schulz</div>
-                     <div class="text-sky-600 text-base font-normal font-['Inter'] leading-tight">schulz@hotmail.com</div>
                   </div>
                </div>
             </div>
@@ -93,10 +54,38 @@
 <script setup>
 import SlideNewContact from "./SlideNewContact.vue";
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 
 const store = useStore();
 const SlideNewContactActive = computed(() => store.state.SlideNewContactActive);
+const store_contacts = computed(() => store.state.contacts);
+const render_contacts = ref(store.state.contacts);
+
+// Hier verwendest du den watch-Handler
+watch(
+   store_contacts,
+   (newValue, oldValue) => {
+      // Diese Funktion wird aufgerufen, wenn sich der Wert von allContacts ändert
+      // Gruppiere die Kontakte nach dem ersten Buchstaben des Vornamens und sortiere sie
+      const groupedAndSortedContacts = Object.entries(newValue).reduce((result, [contactId, contact]) => {
+         const firstLetter = contact.first_name.charAt(0).toUpperCase();
+         result[firstLetter] = result[firstLetter] || [];
+         result[firstLetter].push({ [contactId]: contact });
+         return result;
+      }, {});
+
+      // Sortiere die Gruppen nach dem ersten Buchstaben
+      const sortedLetters = Object.keys(groupedAndSortedContacts).sort();
+
+      // Erstelle das resultierende Objekt / Array
+      const resultObject = sortedLetters.reduce((result, letter) => {
+         result[letter] = groupedAndSortedContacts[letter];
+         return result;
+      }, {});
+      render_contacts.value = resultObject;
+   },
+   { immediate: true }
+);
 
 const toggleSlideNewContact = () => {
    store.commit("toggleSlideNewContact");

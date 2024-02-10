@@ -7,7 +7,6 @@
       <div class="w-60 1xl:flex 1xl:h-screen bg-white flex-col justify-between items-center flex-shrink-0 z-30 absolute left-0 top-0 bottom-0 hidden">
          <Sidebar></Sidebar>
       </div>
-
       <div class="w-full 1xl:w-[calc(100%-15rem)] 1xl:h-[calc(100vh-6rem)] flex justify-center items-center absolute right-0 bottom-0 bg-[#F6F7F8]">
          <router-view> </router-view>
       </div>

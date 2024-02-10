@@ -5,23 +5,26 @@
          <div class="flex items-center border-b-2 bg-[#29ABE2] w-1 h-16"></div>
          <div class="h-full w-72 p-2 flex items-center text-2xl">Key Metrics at a Glance</div>
       </div>
+
       <div class="mt-12 w-[64rem] flex items-center justify-between">
          <div class="flex flex-col justify-between w-[35rem] h-[35rem]">
             <div class="w-full flex justify-between">
-               <div class="w-[16.5rem] h-[10.5rem] flex justify-center items-center rounded-3xl bg-white">
+               <div class="shadow w-[16.5rem] h-[10.5rem] flex justify-center items-center rounded-3xl bg-white">
                   <div class="w-[14.5rem] h-full gap-x-5 flex items-center justify-center">
                      <div class="w-[4.5rem] h-[4.5rem] rounded-full bg-[#2A3647] flex justify-center items-center"><img src="../assets/pencil.svg" /></div>
                      <div class="flex flex-col items-center justify-center h-full">
-                        <div class="text-[4rem] font-semibold">1</div>
+                        <div class="text-[4rem] font-semibold" v-if="storeTasks['ToDo'] && storeTasks['ToDo'].length > 0">{{ storeTasks["ToDo"].length }}</div>
+                        <div class="text-[4rem] font-semibold" v-if="!storeTasks['ToDo']">0</div>
                         <div class="text-center text-xl text-gray-700">To-do</div>
                      </div>
                   </div>
                </div>
-               <div class="w-[16.5rem] h-[10.5rem] flex justify-center items-center rounded-3xl bg-white">
+               <div class="w-[16.5rem] h-[10.5rem] flex justify-center items-center rounded-3xl bg-white shadow">
                   <div class="w-[14.5rem] h-full gap-x-5 flex items-center justify-center">
                      <div class="w-[4.5rem] h-[4.5rem] rounded-full bg-[#2A3647] flex justify-center items-center"><img src="../assets/check_board.svg" /></div>
                      <div class="flex flex-col items-center justify-center h-full">
-                        <div class="text-[4rem] font-semibold">1</div>
+                        <div class="text-[4rem] font-semibold" v-if="storeTasks['Done'] && storeTasks['Done'].length > 0">{{ storeTasks["Done"].length }}</div>
+                        <div class="text-[4rem] font-semibold" v-if="!storeTasks['Done']">0</div>
                         <div class="text-center text-xl text-gray-700">Done</div>
                      </div>
                   </div>
@@ -31,8 +34,8 @@
                <div class="w-full h-40 px-12 py-7 bg-white rounded-3xl shadow justify-center items-center gap-16 inline-flex">
                   <div class="justify-start items-center gap-4 flex">
                      <div class="justify-center items-center gap-2.5 flex">
-                        <div class="w-14 h-14 relative">
-                           <div class="w-14 h-14 left-0 top-0 absolute bg-orange-600 rounded-full flex justify-center items-center">
+                        <div class="w-[4.5rem] h-[4.5rem] relative">
+                           <div class="w-[4.5rem] h-[4.5rem] left-0 top-0 absolute bg-orange-600 rounded-full flex justify-center items-center">
                               <img src="../assets/prio_alta.svg" alt="" srcset="" />
                            </div>
                            <div class="w-9 h-6 left-[0.785rem] top-4 absolute">
@@ -41,12 +44,12 @@
                         </div>
                      </div>
                      <div class="flex-col justify-center items-center inline-flex gap-3">
-                        <div class="w-12 text-center text-black text-6xl font-semibold leading-10">1</div>
+                        <div class="w-12 text-center text-black text-6xl font-semibold leading-10">{{ urgentTasksDeadline }}</div>
                         <div class="text-center text-xl text-gray-700">Urgent</div>
                      </div>
                   </div>
                   <div class="flex-col justify-start items-start gap-3 inline-flex">
-                     <div class="text-gray-700 text-xl font-bold leading-relaxed">October 16, 2022</div>
+                     <div class="text-gray-700 text-xl font-bold leading-relaxed">{{ formattedDate }}</div>
                      <div class="text-center text-xl text-gray-700">Upcoming Deadline</div>
                   </div>
                </div>
@@ -54,20 +57,29 @@
             <div class="w-full flex justify-between">
                <div class="w-40 h-40 py-6 bg-white rounded-3xl shadow flex-col justify-center items-center gap-3 inline-flex">
                   <div class="flex-col justify-center items-center flex gap-3">
-                     <div class="text-center text-black text-6xl font-semibold leading-10">5</div>
+                     <div class="text-center text-black text-6xl font-semibold leading-10" v-if="storeTasks['Done'] && storeTasks['Done'].length > 0">
+                        {{ storeTasks["Done"].length }}
+                     </div>
+                     <div class="text-center text-black text-6xl font-semibold leading-10" v-if="!storeTasks['Done']">0</div>
                      <div class="text-center text-xl text-gray-700">Tasks in <br />Board</div>
                   </div>
                </div>
                <div class="w-40 h-40 py-6 bg-white rounded-3xl shadow flex-col justify-center items-center gap-3 inline-flex">
                   <div class="flex-col justify-center items-center flex gap-3">
-                     <div class="text-center text-black text-6xl font-semibold leading-10">5</div>
-                     <div class="text-center text-gray-700 text-xl font-normal leading-normal">Tasks in <br />Board</div>
+                     <div class="text-center text-black text-6xl font-semibold leading-10" v-if="storeTasks['Progress'] && storeTasks['Progress'].length > 0">
+                        {{ storeTasks["Progress"].length }}
+                     </div>
+                     <div class="text-center text-black text-6xl font-semibold leading-10" v-if="!storeTasks['Progress']">0</div>
+                     <div class="text-center text-gray-700 text-xl font-normal leading-normal">Tasks in <br />Progress</div>
                   </div>
                </div>
                <div class="w-40 h-40 py-6 bg-white rounded-3xl shadow flex-col justify-center items-center gap-3 inline-flex">
                   <div class="flex-col justify-center items-center flex gap-3">
-                     <div class="text-center text-black text-6xl font-semibold leading-10">5</div>
-                     <div class="text-center text-gray-700 text-xl font-normal leading-normal">Tasks in <br />Board</div>
+                     <div class="text-center text-black text-6xl font-semibold leading-10" v-if="storeTasks['Feedback'] && storeTasks['Feedback'].length > 0">
+                        {{ storeTasks["Feedback"].length }}
+                     </div>
+                     <div class="text-center text-black text-6xl font-semibold leading-10" v-if="!storeTasks['Feedback']">0</div>
+                     <div class="text-center text-gray-700 text-xl font-normal leading-normal">Awaiting <br />Feedback</div>
                   </div>
                </div>
             </div>
@@ -79,7 +91,51 @@
       </div>
    </div>
 </template>
-<script setup></script>
+<script setup>
+import { ref, watch } from "vue";
+import { useStore } from "vuex";
+import { computed } from "vue";
+
+const store = useStore();
+const storeTasks = computed(() => store.state.tasks);
+const storeCategory = computed(() => store.state.categories);
+const storeContacts = computed(() => store.state.contacts);
+const urgentTasksDeadline = ref(0);
+
+const today = new Date();
+const formattedDate = today.toLocaleDateString("en-US", {
+   year: "numeric",
+   month: "long",
+   day: "numeric",
+});
+
+watch(
+   storeTasks,
+   (newValue, oldValue) => {
+      urgentTasksDeadline.value = getTotalFilteredTasks(newValue);
+   },
+   { immediate: true }
+);
+
+function getTotalFilteredTasks(data) {
+   const today = new Date();
+   let totalFilteredTasks = 0;
+
+   Object.values(data).forEach((tasks) => {
+      tasks.forEach((task) => {
+         if (task.status !== "Done") {
+            const dueDate = new Date(task.due_date);
+            const diffInDays = Math.floor((dueDate - today) / (1000 * 60 * 60 * 24));
+            if (diffInDays <= 3) {
+               totalFilteredTasks++;
+            }
+         }
+      });
+   });
+
+   return totalFilteredTasks;
+}
+</script>
 <style scoped>
 .h-4_5rem {
    height: 4.5rem;
