@@ -31,8 +31,17 @@ export default createStore({
       categories: Object,
       tasks: Object,
       subtasks: Object,
+      currentTask: Object,
    },
    mutations: {
+      setCurrentTask(state, value) {
+         state.currentTask = value;
+      },
+
+      deletedCurrentTaskValues(state) {
+         state.currentTask = null;
+      },
+
       toggleSlideNewContact(state) {
          state.SlideNewContactActive == true ? (state.SlideNewContactActive = false) : (state.SlideNewContactActive = true);
       },
