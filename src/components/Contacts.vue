@@ -25,11 +25,12 @@
             <div class="w-full h-14 px-9 py-4 flex-col justify-center items-start gap-2 inline-flex border-b-2 border-[#D1D1D1] rounded-sm">
                <div class="text-black text-xl font-normal leading-normal">{{ letter }}</div>
             </div>
-            <div class="w-full p-3 flexbox">
+            <div class="w-full p-3 flex flex-wrap gap-4">
                <div v-for="contacts in alpha">
                   <div
-                     class="w-80 h-20 px-6 py-3.5 bg-white rounded-lg justify-start items-center gap-9 inline-flex hover:cursor-pointer hover:bg-slate-100 shadow-sm"
-                     v-for="contact in contacts"
+                     class="min-w-64 h-24 px-6 py-3.5 bg-white rounded-lg justify-start items-center gap-9 inline-flex shadow-sm"
+                     v-for="(contact, id) in contacts"
+                     :key="id"
                   >
                      <div class="bg-white rounded-3xl justify-center items-center gap-2.5 flex">
                         <div class="w-10 h-10">
@@ -42,7 +43,18 @@
                      </div>
                      <div class="flex-col justify-start items-start gap-1 inline-flex">
                         <div class="text-black text-xl font-normal leading-normal">{{ contact["first_name"] }} {{ contact["last_name"] }}</div>
-                        <div class="text-sky-600 text-base font-normal leading-tight">{{ contact["email"] }}</div>
+                        <div class="text-sky-600 text-base font-normal leading-tight">Phone: {{ contact["phone"] }}</div>
+                        <div class="text-sky-600 text-base font-normal leading-tight">Email: {{ contact["email"] }}</div>
+                     </div>
+                     <div class="bg-white rounded-3xl justify-center items-center gap-2.5 flex">
+                        <div class="w-10 h-10">
+                           <div
+                              @click="remove_contact(contact['ID_contact'])"
+                              class="w-10 h-10 rounded-full border-2 border-white flex justify-center items-center bg-blue-600 hover:cursor-pointer hover:bg-blue-500"
+                           >
+                              <img src="../assets/trash.svg" alt="" srcset="" />
+                           </div>
+                        </div>
                      </div>
                   </div>
                </div>
@@ -60,6 +72,26 @@ const store = useStore();
 const SlideNewContactActive = computed(() => store.state.SlideNewContactActive);
 const store_contacts = computed(() => store.state.contacts);
 const render_contacts = ref(store.state.contacts);
+
+const remove_contact = async (remove_contact) => {
+   const removeTask = JSON.stringify({
+      ID_contact: remove_contact,
+   });
+
+   const requestOptions = {
+      method: "DELETE",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: removeTask,
+   };
+
+   await fetch("http://localhost:8080/remove_contact", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+   store.dispatch("fetchData", "contacts");
+   console.log("Remove Contact:", remove_contact);
+};
 
 // Hier verwendest du den watch-Handler
 watch(

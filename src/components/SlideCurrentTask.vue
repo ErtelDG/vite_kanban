@@ -7,8 +7,14 @@
       @submit.prevent="updateCurrentTask"
    >
       <div class="w-[64rem] h-full flex flex-col items-center p-4">
-         <div class="pb-6 w-full">
-            <input class="text-black text-6xl font-bold w-full outline-none" :value="current_title" required :readonly="!isEditable" />
+         <div class="pb-4 w-full">
+            <input
+               class="text-black text-5xl font-bold w-full outline-none p-2"
+               :class="{ 'rounded-lg': isEditable, border: isEditable, 'border-neutral-300': isEditable }"
+               v-model="current_title"
+               required
+               :readonly="!isEditable"
+            />
 
             <div class="w-full h-4 text-rose-400 text-xs font-normal leading-none pl-2" v-if="!current_title">This field is required</div>
          </div>
@@ -109,7 +115,7 @@
                         <label
                            for="todo"
                            :style="{ backgroundColor: current_status === 'ToDo' ? 'lightgrey' : '' }"
-                           class="flex justify-center items-center text-black text-xl font-normal leading-normal px-4 h-10 w-full py-1 grow shrink basis-0 rounded-lg shadow gap-2 mr-2 hover:cursor-pointer"
+                           class="flex justify-center items-center text-black text-lg font-normal leading-normal px-4 h-8 w-full py-1 grow shrink basis-0 rounded-lg shadow gap-2 mr-2 hover:cursor-pointer"
                            ><div>ToDo</div>
                         </label>
 
@@ -117,7 +123,7 @@
                         <label
                            for="progress"
                            :style="{ backgroundColor: current_status === 'Progress' ? 'lightgrey' : '' }"
-                           class="flex justify-center items-center text-black text-xl font-normal leading-normal px-4 h-10 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 mx-2 hover:cursor-pointer"
+                           class="flex justify-center items-center text-black text-lg font-normal leading-normal px-4 h-8 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 mx-2 hover:cursor-pointer"
                            ><div>Progress</div>
                         </label>
 
@@ -125,14 +131,14 @@
                         <label
                            for="feedback"
                            :style="{ backgroundColor: current_status === 'Feedback' ? 'lightgrey' : '' }"
-                           class="flex justify-center items-center text-black text-xl font-normal leading-normal px-4 h-10 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
+                           class="flex justify-center items-center text-black text-lg font-normal leading-normal px-4 h-8 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
                            ><div>Feedback</div>
                         </label>
                         <input @click="updateStatus('Done')" type="radio" id="done" value="Done" :disabled="!isEditable" />
                         <label
                            for="done"
                            :style="{ backgroundColor: current_status === 'Done' ? 'lightgrey' : '' }"
-                           class="flex justify-center items-center text-black text-xl font-normal leading-normal px-4 h-10 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
+                           class="flex justify-center items-center text-black text-lg font-normal leading-normal px-4 h-8 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
                            ><div>Done</div>
                         </label>
                      </div>
@@ -151,6 +157,46 @@
                         <option class="text-lg font-normal" v-for="(category, id) in store_categories" :key="id" :value="id">{{ category }}</option>
                      </select>
                      <div class="w-full h-3"></div>
+                  </div>
+                  <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
+                     <div class="w-full justify-between items-start gap-2 inline-flex">
+                        <div class="w-18">
+                           <span class="text-gray-700 text-xl font-normal leading-normal">Subtask:</span>
+                        </div>
+                        <div class="self-stretch flex-col justify-start items-start gap-1 flex w-3/4">
+                           <div
+                              class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex h-8 relative"
+                           >
+                              <input
+                                 :disabled="!isEditable"
+                                 v-model="newItem"
+                                 type="text"
+                                 placeholder="Title..."
+                                 class="text-gray-700 text-base font-normal leading-normal outline-none"
+                              />
+                           </div>
+                        </div>
+                        <span
+                           @click="isEditable && addItem()"
+                           class="flex justify-center items-center text-black text-xl font-normal leading-normal px-4 h-8 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer hover:bg-[#D3D3D3]"
+                           >Add</span
+                        >
+                     </div>
+                  </div>
+                  <div class="w-full h-24 overflow-auto">
+                     <ul :class="{ 'no-select': !isEditable }">
+                        <li
+                           class="w-full flex"
+                           v-for="(item, index) in currentSubtasks"
+                           :key="index"
+                           :class="{ checked: item.checked }"
+                           @click="isEditable && toggleItem(index)"
+                           :style="{ 'no-select': !isEditable }"
+                        >
+                           <div class="w-full ml-8">{{ item.title }}</div>
+                           <span @click="removeItem(index)" class="w-8 flex items-center justify-center text-center">x</span>
+                        </li>
+                     </ul>
                   </div>
                </div>
                <div class="w-full h-8 flex justify-end items-center gap-4 pb-8">
@@ -202,12 +248,33 @@ const current_date = ref("");
 const current_category = ref("");
 const current_ID_task = ref("");
 const current_status = ref("");
+const current_subtasks = ref("");
 const storeCurrentTask = computed(() => store.state.currentTask);
 const isEditable = ref(false);
 const closeSlider = ref(false);
 const statusTask = ref(["ToDo", "Progress", "Feedback", "Done"]);
 
 const store = useStore();
+const newItem = ref("");
+const currentSubtasks = ref([]);
+
+const addItem = () => {
+   if (newItem.value.trim() === "") {
+      alert("You must write something!");
+      return;
+   }
+   currentSubtasks.value.push({ title: newItem.value.trim(), checked: false, subtaskId: Date.now() });
+
+   newItem.value = "";
+};
+
+const toggleItem = (index) => {
+   currentSubtasks.value[index].checked = !currentSubtasks.value[index].checked;
+};
+
+const removeItem = (index) => {
+   currentSubtasks.value.splice(index, 1);
+};
 const updatePrio = (value) => {
    current_prio.value = value;
 };
@@ -227,6 +294,8 @@ watch(
       current_category.value = newValue.category;
       current_ID_task.value = newValue.ID_task;
       current_status.value = newValue.status;
+      current_subtasks.value = newValue.subtasks;
+      currentSubtasks.value = newValue.subtasks;
    },
    { immediate: true }
 );
@@ -241,9 +310,9 @@ const updateCurrentTask = async () => {
       prio: current_prio.value,
       due_date: current_date.value,
       category: current_category.value,
-      subtasks: [],
+      subtasks: currentSubtasks.value,
    });
-
+   console.log(currentSubtasks.value);
    const requestOptions = {
       method: "POST",
       mode: "no-cors",
@@ -384,5 +453,93 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="radio"] {
    visibility: hidden;
    width: 0;
+}
+
+/* Style the list items */
+ul li {
+   cursor: pointer;
+   position: relative;
+   padding: 4px;
+   background: #d3d3d3;
+   font-size: 1rem;
+   transition: 0.2s;
+   /* make the list items unselectable */
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+ul li:nth-child(odd) {
+   background: #eee;
+}
+
+/* Darker background-color on hover */
+ul li:hover {
+   background: #ddd;
+}
+
+/* When clicked on, add a background color and strike out text */
+ul li.checked {
+   width: 100%;
+   background: #888;
+   color: #fff;
+   text-decoration: line-through;
+}
+
+/* Add a "checked" mark when clicked on */
+ul li.checked::before {
+   content: "";
+   position: absolute;
+   border-color: #fff;
+   border-style: solid;
+   border-width: 0 2px 2px 0;
+   top: 0.3rem;
+   left: 1rem;
+   transform: rotate(45deg);
+   height: 1rem;
+   width: 0.5rem;
+}
+
+/* Style the close button */
+.close {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: absolute;
+   right: 0;
+   top: 0;
+   padding: 0.75rem 1rem 0.75rem 1rem;
+}
+
+.close:hover {
+   background-color: #f44336;
+   color: white;
+}
+
+/* Clear floats after the header */
+.header:after {
+   content: "";
+   display: table;
+   clear: both;
+}
+
+/* Style the "Add" button */
+.addBtn {
+   padding: 0.5rem;
+   width: 25%;
+   background: #d9d9d9;
+   color: #555;
+   float: left;
+   text-align: center;
+   font-size: 1rem;
+   cursor: pointer;
+   transition: 0.3s;
+   border-radius: 0;
+}
+
+.addBtn:hover {
+   background-color: #bbb;
 }
 </style>

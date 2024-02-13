@@ -13,7 +13,7 @@
             </div>
          </div>
       </div>
-      <div class="w-full mt-12 mb-8 h-full flex justify-between">
+      <div class="w-[70rem] mt-12 mb-8 h-full flex justify-between">
          <div class="w-full h-full px-2 border-x-2" v-for="(tasks, statusTask) in storeTasks" :key="statusTask">
             <button class="w-full h-6 flex justify-center px-8">
                <div class="text-slate-600 text-xl font-bold">{{ statusTask }}</div>
@@ -34,18 +34,25 @@
                         <div class="h-12 self-stretch text-neutral-400 text-base font-normal leading-tight">{{ task.description }}</div>
                      </div>
                      <div class="w-full h-4 relative flex justify-between items-center">
-                        <div class="h-2 w-1/2">
-                           <div class="h-full w-full rounded-lg border-2 border-gray-500" v-if="task.subtasks && 'subtask' in task.subtasks">
-                              <div class="h-full w-1/2 bg-blue-500"></div>
+                        <div class="h-2 w-2/3">
+                           <div class="h-full w-full rounded-lg border-2 border-gray-500" v-if="task.subtasks && task.subtasks.length > 0">
+                              <div
+                                 class="h-full bg-blue-500"
+                                 :style="{
+                                    width: 'calc(100% / ' + task.subtasks.length + ' * ' + task.subtasks.filter((subtask) => subtask.checked).length + ')',
+                                 }"
+                              ></div>
                            </div>
                         </div>
-                        <div class="text-black text-xs font-normal leading-none" v-if="task.subtasks && 'subtask' in task.subtasks">1/2 Subtasks</div>
+                        <div class="text-black text-xs font-normal leading-none" v-if="task.subtasks && task.subtasks.length > 0">
+                           {{ task.subtasks.filter((subtask) => subtask.checked).length }}/{{ task.subtasks.length }} Subtasks
+                        </div>
                      </div>
                      <div class="self-stretch justify-between items-center flex gap-x-2">
-                        <div class="w-5/6 justify-start items-start flex px-2">
+                        <div class="w-5/6 justify-start items-start flex">
                            <div class="w-full h-10 bg-gray-600 rounded-md justify-start px-2 items-center flex text-sm text-white gap-3">
                               <img class="w-4 h-4" src="/src/assets/person_transparent.svg" alt="" srcset="" />
-                              <div class="w-full">
+                              <div class="w-full" v-if="storeContacts[task.assigned]">
                                  {{ storeContacts[task.assigned].last_name.substring(0, 1) }}. {{ storeContacts[task.assigned].last_name }}
                               </div>
                            </div>
