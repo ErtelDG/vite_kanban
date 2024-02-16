@@ -29,12 +29,12 @@ const routes = [
       component: Contacts,
    },
    {
-      path: "/PrivacyPolicy",
+      path: "/privacy_policy",
       name: "PrivacyPolicy",
       component: PrivacyPolicy,
    },
    {
-      path: "/LegalNotice",
+      path: "/legal_notice",
       name: "LegalNotice",
       component: LegalNotice,
    },

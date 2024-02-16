@@ -36,12 +36,12 @@ import DarkModeBtn from "./DarkModeBtn.vue";
       </div>
 
       <div class="flex flex-col justify-start items-center gap-4 pb-16 w-full">
-         <div class="hover:bg-[#8895a5] hover:cursor-pointer p-4 flex items-center justify-center w-full">
+         <router-link to="/privacy_policy" class="hover:bg-[#8895a5] hover:cursor-pointer p-4 flex items-center justify-center w-full">
             <div class="text-white text-base font-normal">Privacy Policy</div>
-         </div>
-         <div class="hover:bg-[#8895a5] hover:cursor-pointer p-4 flex items-center justify-center w-full">
+         </router-link>
+         <router-link to="/legal_notice" class="hover:bg-[#8895a5] hover:cursor-pointer p-4 flex items-center justify-center w-full">
             <div class="text-white text-base font-normal">Legal notice</div>
-         </div>
+         </router-link>
       </div>
    </div>
 </template>

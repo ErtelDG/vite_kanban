@@ -21,38 +21,40 @@
                <div class="text-gray-700 text-2xl font-normal leading-loose">Better with a team</div>
             </div>
          </div>
-         <div class="w-full flex flex-col" v-for="(alpha, letter) in render_contacts" :ref="letter">
-            <div class="w-full h-14 px-9 py-4 flex-col justify-center items-start gap-2 inline-flex border-b-2 border-[#D1D1D1] rounded-sm">
-               <div class="text-black text-xl font-normal leading-normal">{{ letter }}</div>
-            </div>
-            <div class="w-full p-3 flex flex-wrap gap-4">
-               <div v-for="contacts in alpha">
-                  <div
-                     class="min-w-64 h-24 px-6 py-3.5 bg-white rounded-lg justify-start items-center gap-9 inline-flex shadow-sm"
-                     v-for="(contact, id) in contacts"
-                     :key="id"
-                  >
-                     <div class="bg-white rounded-3xl justify-center items-center gap-2.5 flex">
-                        <div class="w-10 h-10">
-                           <div class="w-10 h-10 rounded-full border-2 border-white flex justify-center items-center bg-blue-600">
-                              <div class="text-white text-xs font-normal flex justify-center items-center">
-                                 {{ contact["first_name"].substring(0, 1) }}{{ contact["last_name"].substring(0, 1) }}
+         <div class="w-full h-[calc(100%-5rem)] overflow-scroll">
+            <div class="w-full flex flex-col" v-for="(alpha, letter) in render_contacts" :ref="letter">
+               <div class="w-full h-14 px-9 py-4 flex-col justify-center items-start gap-2 inline-flex border-b-2 border-[#D1D1D1] rounded-sm">
+                  <div class="text-black text-xl font-normal leading-normal">{{ letter }}</div>
+               </div>
+               <div class="w-full p-3 flex flex-wrap gap-4">
+                  <div v-for="contacts in alpha">
+                     <div
+                        class="min-w-64 h-24 px-6 py-3.5 bg-white rounded-lg justify-start items-center gap-9 inline-flex shadow-sm"
+                        v-for="(contact, id) in contacts"
+                        :key="id"
+                     >
+                        <div class="bg-white rounded-3xl justify-center items-center gap-2.5 flex">
+                           <div class="w-10 h-10">
+                              <div class="w-10 h-10 rounded-full border-2 border-white flex justify-center items-center bg-blue-600">
+                                 <div class="text-white text-xs font-normal flex justify-center items-center">
+                                    {{ contact["first_name"].substring(0, 1) }}{{ contact["last_name"].substring(0, 1) }}
+                                 </div>
                               </div>
                            </div>
                         </div>
-                     </div>
-                     <div class="flex-col justify-start items-start gap-1 inline-flex">
-                        <div class="text-black text-xl font-normal leading-normal">{{ contact["first_name"] }} {{ contact["last_name"] }}</div>
-                        <div class="text-sky-600 text-base font-normal leading-tight">Phone: {{ contact["phone"] }}</div>
-                        <div class="text-sky-600 text-base font-normal leading-tight">Email: {{ contact["email"] }}</div>
-                     </div>
-                     <div class="bg-white rounded-3xl justify-center items-center gap-2.5 flex">
-                        <div class="w-10 h-10">
-                           <div
-                              @click="remove_contact(contact['ID_contact'])"
-                              class="w-10 h-10 rounded-full border-2 border-white flex justify-center items-center bg-blue-600 hover:cursor-pointer hover:bg-blue-500"
-                           >
-                              <img src="../assets/trash.svg" alt="" srcset="" />
+                        <div class="flex-col justify-start items-start gap-1 inline-flex">
+                           <div class="text-black text-xl font-normal leading-normal">{{ contact["first_name"] }} {{ contact["last_name"] }}</div>
+                           <div class="text-sky-600 text-base font-normal leading-tight">Phone: {{ contact["phone"] }}</div>
+                           <div class="text-sky-600 text-base font-normal leading-tight">Email: {{ contact["email"] }}</div>
+                        </div>
+                        <div class="bg-white rounded-3xl justify-center items-center gap-2.5 flex">
+                           <div class="w-10 h-10">
+                              <div
+                                 @click="remove_contact(contact['ID_contact'])"
+                                 class="w-10 h-10 rounded-full border-2 border-white flex justify-center items-center bg-blue-600 hover:cursor-pointer hover:bg-blue-500"
+                              >
+                                 <img src="../assets/trash.svg" alt="" srcset="" />
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -162,5 +164,10 @@ const toggleSlideNewContact = () => {
 */
 .flexbox > div:nth-child(-n + 3) {
    margin-top: 0;
+}
+
+::-webkit-scrollbar {
+   width: 0px;
+   background: transparent; /* make scrollbar transparent */
 }
 </style>
