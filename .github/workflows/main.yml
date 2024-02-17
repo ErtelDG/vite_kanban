@@ -31,4 +31,4 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SERVER_SSH_KEY }}
         source: "dist/*"
-        target: "/path/to/your/server/directory"
+        target: "/var/www/join"
