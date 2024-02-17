@@ -70,7 +70,7 @@
                         {{ storeTasks["Done"].length + storeTasks["Progress"].length + storeTasks["ToDo"].length }}
                      </div>
                      <div class="text-center text-black text-6xl font-semibold leading-10" v-if="Object.keys(storeTasks).length == undefined">0</div>
-                     <div class="text-center text-xl text-gray-700">Tasks in <br />Board</div>
+                     <div class="text-center text-xl text-gray-700">TASKS IN <br />Board</div>
                   </div>
                </router-link>
                <router-link
