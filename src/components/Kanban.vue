@@ -1,6 +1,6 @@
 <template>
    <div class="w-full h-full pl-16 flex flex-col justify-start pt-8 gap-y-6">
-      <div class="w-[70rem] flex items-center justify-between">
+      <div class="w-[80rem] flex items-center justify-between">
          <div class="text-black text-6xl font-bold flex items-center justify-center">Board</div>
 
          <div
@@ -13,7 +13,7 @@
             </div>
          </div>
       </div>
-      <div class="w-[70rem] h-[calc(100%-6rem)] flex justify-between">
+      <div class="w-[80rem] h-[calc(100%-6rem)] flex justify-between">
          <div class="w-full h-full px-2 border-x-2" v-for="(tasks, statusTask) in storeTasks" :key="statusTask">
             <button class="w-full h-6 flex justify-center px-8">
                <div class="text-slate-600 text-xl font-bold">{{ statusTask }}</div>
@@ -29,9 +29,9 @@
                      <div class="px-2 py-1 w-full h-12 bg-gray-600 rounded-lg justify-start items-start inline-flex">
                         <div class="w-full h-12 text-white text-base font-normal leading-tight">{{ storeCategory[task.category] }}</div>
                      </div>
-                     <div class="self-stretch h-full rounded-lg flex-col justify-start items-start gap-2 flex">
-                        <div class="h-4 self-stretch text-gray-700 text-base font-bold leading-tight">{{ task.title }}</div>
-                        <div class="h-12 self-stretch text-neutral-400 text-base font-normal leading-tight">{{ task.description }}</div>
+                     <div class="self-stretch h-full rounded-lg flex-col justify-start items-start gap-2 flex overflow-scroll">
+                        <div class="h-4 self-stretch text-gray-700 text-xs font-bold leading-tight">{{ task.title }}</div>
+                        <div class="h-12 self-stretch text-neutral-400 text-xs font-normal leading-tight">{{ task.description }}</div>
                      </div>
                      <div class="w-full h-4 relative flex justify-between items-center">
                         <div class="h-2 w-2/3">

@@ -63,8 +63,17 @@
                   class="hover:bg-[#d1d5db] w-40 h-40 py-6 bg-white rounded-3xl shadow flex-col justify-center items-center gap-3 inline-flex"
                >
                   <div class="flex-col justify-center items-center flex gap-3">
-                     <div class="text-center text-black text-6xl font-semibold leading-10" v-if="storeTasks['Done'] && storeTasks['Done'].length > 0">
-                        {{ storeTasks["Done"].length }}
+                     <div
+                        class="text-center text-black text-6xl font-semibold leading-10"
+                        v-if="
+                           storeTasks['Done'] ||
+                           storeTasks['Progress'] ||
+                           (storeTasks['Feedback'] && storeTasks['Done'].length > 0) ||
+                           storeTasks['Progress'].length > 0 ||
+                           storeTasks['Feedback'].length > 0
+                        "
+                     >
+                        {{ storeTasks["Done"].length + storeTasks["Progress"].length + storeTasks["ToDo"].length }}
                      </div>
                      <div class="text-center text-black text-6xl font-semibold leading-10" v-if="!storeTasks['Done']">0</div>
                      <div class="text-center text-xl text-gray-700">Tasks in <br />Board</div>
