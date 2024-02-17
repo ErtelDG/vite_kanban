@@ -51,14 +51,14 @@
                      <div class="self-stretch justify-between items-center flex gap-x-2">
                         <div class="w-5/6 justify-start items-start flex">
                            <div class="w-full h-10 bg-gray-600 rounded-md justify-start px-2 items-center flex text-sm text-white gap-3">
-                              <img class="w-4 h-4" src="/src/assets/person_transparent.svg" alt="" srcset="" />
+                              <img class="w-4 h-4" src="../assets/person_transparent.svg" alt="" srcset="" />
                               <div class="w-full" v-if="storeContacts[task.assigned]">
                                  {{ storeContacts[task.assigned].last_name.substring(0, 1) }}. {{ storeContacts[task.assigned].last_name }}
                               </div>
                            </div>
                         </div>
                         <div class="w-6 h-6 rounded-full justify-center items-center flex" :style="{ backgroundColor: prioBackgroundColor(task.prio) }">
-                           <img class="w-4 h-4" :src="`/src/assets/${task.prio}_transparent.svg`" alt="" srcset="" />
+                           <img class="w-4 h-4" :src="`../assets/${task.prio}_transparent.svg`" alt="" srcset="" />
                         </div>
                      </div>
                   </div>
