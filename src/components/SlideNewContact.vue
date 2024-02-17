@@ -183,7 +183,7 @@ const add_new_contact = async () => {
       body: newContact,
    };
 
-   await fetch("http://localhost:8080/add_contact", requestOptions)
+   await fetch("https://minibackendgo.denniscodeworld.de/add_contact", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));

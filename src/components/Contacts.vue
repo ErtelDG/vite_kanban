@@ -87,7 +87,7 @@ const remove_contact = async (remove_contact) => {
       body: removeTask,
    };
 
-   await fetch("http://localhost:8080/remove_contact", requestOptions)
+   await fetch("https://minibackendgo.denniscodeworld.de/remove_contact", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));

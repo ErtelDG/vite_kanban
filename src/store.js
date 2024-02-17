@@ -75,7 +75,7 @@ export default createStore({
             method: "GET",
             redirect: "follow",
          };
-         fetch(`http://localhost:8080/${URL}`, requestOptions)
+         fetch(`https://minibackendgo.denniscodeworld.de/${URL}`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
                commit("update_state_response", { URL, result });

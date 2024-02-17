@@ -42,7 +42,7 @@ const add_new_task = async () => {
       body: newTask,
    };
 
-   await fetch("http://localhost:8080/add_task", requestOptions)
+   await fetch("https://minibackendgo.denniscodeworld.de/add_task", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));

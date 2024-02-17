@@ -320,7 +320,7 @@ const updateCurrentTask = async () => {
       body: updateTask,
    };
 
-   await fetch("http://localhost:8080/update_task", requestOptions)
+   await fetch("https://minibackendgo.denniscodeworld.de/update_task", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
@@ -354,7 +354,7 @@ const removeCurrentTask = async (id) => {
       body: delTask,
    };
 
-   await fetch("http://localhost:8080/del_task", requestOptions)
+   await fetch("https://minibackendgo.denniscodeworld.de/del_task", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
