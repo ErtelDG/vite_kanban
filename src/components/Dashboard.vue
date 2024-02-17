@@ -65,17 +65,11 @@
                   <div class="flex-col justify-center items-center flex gap-3">
                      <div
                         class="text-center text-black text-6xl font-semibold leading-10"
-                        v-if="
-                           storeTasks['Done'] ||
-                           storeTasks['Progress'] ||
-                           (storeTasks['Feedback'] && storeTasks['Done'].length > 0) ||
-                           storeTasks['Progress'].length > 0 ||
-                           storeTasks['Feedback'].length > 0
-                        "
+                        v-if="storeTasks['Done'] || storeTasks['Progress'] || (storeTasks['Feedback'] && Object.keys(storeTasks).length != undefined)"
                      >
                         {{ storeTasks["Done"].length + storeTasks["Progress"].length + storeTasks["ToDo"].length }}
                      </div>
-                     <div class="text-center text-black text-6xl font-semibold leading-10" v-if="!storeTasks['Done']">0</div>
+                     <div class="text-center text-black text-6xl font-semibold leading-10" v-if="Object.keys(storeTasks).length == undefined">0</div>
                      <div class="text-center text-xl text-gray-700">Tasks in <br />Board</div>
                   </div>
                </router-link>
