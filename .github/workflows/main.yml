@@ -27,4 +27,7 @@ jobs:
           password: ${{ secrets.ftp_password }}
 
       - name: Create test file
-        run: sudo echo "TESTINHALT" | tee /var/TESTDATEI > /dev/null
+        run: |
+          cd /var/
+          touch testdatei
+
