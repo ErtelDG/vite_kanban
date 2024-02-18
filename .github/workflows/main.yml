@@ -17,11 +17,19 @@ jobs:
         install -m 600 -D /dev/null ~/.ssh/id_rsa
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+    - name: checkout@v4
+      uses: actions/checkout@v4
+    - name: install node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 'latest'      
+    - name: build vuejs project
+      run: |
+        npm install
+        npm run build    
     - name: connect and pull
       run: |
-        sudo mkdir -p /var/www/test
-        cd /var/www/test
-        sudo touch testdatei
-        scp testdatei ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/test
+        cd /dist
+        scp *.* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/join    
     - name: cleanup
       run: rm -rf ~/.ssh
