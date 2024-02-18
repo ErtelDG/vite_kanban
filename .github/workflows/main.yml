@@ -20,8 +20,6 @@ jobs:
     - name: connect and pull
       run: |
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} 
-        cd /var/
-        sudo touch testdatei
-        sudo scp testdatei ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var
+        cd /var/ && touch testdatei && scp testdatei ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var
     - name: cleanup
       run: rm -rf ~/.ssh
