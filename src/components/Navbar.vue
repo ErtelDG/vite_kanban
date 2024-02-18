@@ -1,8 +1,12 @@
 <script setup></script>
 
 <template>
-   <div class="w-full h-full flex justify-end sm2:justify-between items-center">
-      <div class="text-xl font-medium text-black hidden sm2:block">Kanban Project Management Tool</div>
+   <div class="h-full flex justify-end sm2:justify-between items-center w-full">
+      <div class="text-xl font-medium text-black hidden xl:block">Kanban Project Management Tool</div>
+      <div class="text-base font-medium text-black sm2:block bg-yellow-300 p-4">
+         The site does not yet have a responsive web design!<br />
+         Please use a minimum width of 960px for desktop view.
+      </div>
       <div class="flex items-center gap-4">
          <div class="relative inline-block dropdown">
             <div class="flex flex-col items-center justify-center w-14 h-14 border-black border-4 rounded-full hover:bg-[#d2d7de] hover:cursor-pointer">

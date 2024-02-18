@@ -7,8 +7,8 @@
       </div>
 
       <div class="mt-12 1xl:w-[64rem] flex items-center gap-x-8">
-         <div class="flex flex-col justify-between w-[35rem] h-[35rem]">
-            <div class="w-full flex justify-between">
+         <div class="flex flex-col justify-between items-center w-[35rem] sm:h-[35rem] gap-8">
+            <div class="w-full flex flex-col items-center sm:flex-row sm:items-stretch gap-8 justify-between">
                <router-link to="/kanban" class="hover:bg-[#d1d5db] shadow w-[16.5rem] h-[10.5rem] flex justify-center items-center rounded-3xl bg-white">
                   <div class="w-[14.5rem] h-full gap-x-5 flex items-center justify-center">
                      <div class="w-[4.5rem] h-[4.5rem] rounded-full bg-[#2A3647] flex justify-center items-center"><img src="../assets/pencil.svg" /></div>
@@ -30,12 +30,12 @@
                   </div>
                </router-link>
             </div>
-            <div class="w-full flex justify-between">
+            <div class="w-[16.5rem] sm:w-full flex sm:justify-between">
                <router-link
                   to="/kanban"
-                  class="w-full h-40 px-12 py-7 bg-white rounded-3xl shadow justify-center items-center gap-16 inline-flex hover:bg-[#d1d5db]"
+                  class="w-full sm:h-40 px-12 py-7 bg-white rounded-3xl shadow justify-center items-center gap-16 sm:inline-flex hover:bg-[#d1d5db]"
                >
-                  <div class="justify-start items-center gap-4 flex">
+                  <div class="justify-center sm:justify-start items-center gap-4 flex mb-8 sm:mb-0">
                      <div class="justify-center items-center gap-2.5 flex">
                         <div class="w-[4.5rem] h-[4.5rem] relative">
                            <div class="w-[4.5rem] h-[4.5rem] left-0 top-0 absolute bg-orange-600 rounded-full flex justify-center items-center">
@@ -51,16 +51,16 @@
                         <div class="text-center text-xl text-gray-700">Urgent</div>
                      </div>
                   </div>
-                  <div class="flex-col justify-start items-start gap-3 inline-flex">
-                     <div class="text-gray-700 text-xl font-bold leading-relaxed">{{ formattedDate }}</div>
+                  <div class="flex-col justify-start items-center sm:items-start gap-3 inline-flex w-full">
+                     <div class="text-gray-700 text-xl font-bold leading-relaxed text-center">{{ formattedDate }}</div>
                      <div class="text-center text-xl text-gray-700">Upcoming Deadline</div>
                   </div>
                </router-link>
             </div>
-            <div class="w-full flex justify-between">
+            <div class="w-full flex-col sm:flex-row flex items-center gap-8 sm:justify-between">
                <router-link
                   to="/kanban"
-                  class="hover:bg-[#d1d5db] w-40 h-40 py-6 bg-white rounded-3xl shadow flex-col justify-center items-center gap-3 inline-flex"
+                  class="hover:bg-[#d1d5db] w-[16.5rem] sm:w-40 h-40 py-6 bg-white rounded-3xl shadow flex-col justify-center items-center gap-3 inline-flex"
                >
                   <div class="flex-col justify-center items-center flex gap-3">
                      <div
@@ -75,7 +75,7 @@
                </router-link>
                <router-link
                   to="/kanban"
-                  class="hover:bg-[#d1d5db] w-40 h-40 py-6 bg-white rounded-3xl shadow flex-col justify-center items-center gap-3 inline-flex"
+                  class="hover:bg-[#d1d5db] w-[16.5rem] sm:w-40 h-40 py-6 bg-white rounded-3xl shadow flex-col justify-center items-center gap-3 inline-flex"
                >
                   <div class="flex-col justify-center items-center flex gap-3">
                      <div class="text-center text-black text-6xl font-semibold leading-10" v-if="storeTasks['Progress'] && storeTasks['Progress'].length > 0">
@@ -87,7 +87,7 @@
                </router-link>
                <router-link
                   to="/kanban"
-                  class="hover:bg-[#d1d5db] w-40 h-40 py-6 bg-white rounded-3xl shadow flex-col justify-center items-center gap-3 inline-flex"
+                  class="hover:bg-[#d1d5db] w-[16.5rem] sm:w-40 h-40 py-6 bg-white rounded-3xl shadow flex-col justify-center items-center gap-3 inline-flex"
                >
                   <div class="flex-col justify-center items-center flex gap-3">
                      <div class="text-center text-black text-6xl font-semibold leading-10" v-if="storeTasks['Feedback'] && storeTasks['Feedback'].length > 0">

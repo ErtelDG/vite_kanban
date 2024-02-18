@@ -117,7 +117,6 @@ function showCurrentTask(id) {
 function addSubtask() {
    listSubtasks.value.push(inputSubtask.value);
    inputSubtask.value = "";
-   alert(listSubtasks.value);
 }
 function prioBackgroundColor(prio) {
    switch (prio) {

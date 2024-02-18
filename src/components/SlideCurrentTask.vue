@@ -342,7 +342,6 @@ const toggleSlideCurrentTask = () => {
 };
 
 const removeCurrentTask = async (id) => {
-   alert(id);
    const delTask = JSON.stringify({
       task_ID: id,
    });
