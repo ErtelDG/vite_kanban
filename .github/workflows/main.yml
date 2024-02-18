@@ -19,7 +19,8 @@ jobs:
         ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
     - name: connect and pull
       run: |
-        cd /var/
+        mk dir /var/www/test
+        cd /var/www/test
         sudo touch testdatei
         scp testdatei ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var
     - name: cleanup
