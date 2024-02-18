@@ -1,12 +1,12 @@
 <template>
-   <div class="w-full h-full pl-16 pt-8 flex flex-col justify-start">
-      <div class="flex justify-between items-center gap-7 w-40rem h-4_5rem">
-         <div class="h-full w-64 font-bold text-6xl flex items-center p-2">Join 360</div>
-         <div class="flex items-center border-b-2 bg-[#29ABE2] w-1 h-16"></div>
-         <div class="h-full w-72 p-2 flex items-center text-2xl">Key Metrics at a Glance</div>
+   <div class="w-full h-full md3:pl-16 pt-8 flex flex-col items-center md3:items-start justify-start">
+      <div class="flex justify-between items-center gap-7 md:2w-[40rem] h-[4.5rem]">
+         <div class="h-full w-full sm2:w-64 font-bold text-6xl flex items-center p-2">Join 360</div>
+         <div class="hidden sm2:flex items-center border-b-2 bg-[#29ABE2] w-1 h-16"></div>
+         <div class="h-full w-72 p-2 hidden sm2:flex items-center text-2xl">Key Metrics at a Glance</div>
       </div>
 
-      <div class="mt-12 w-[64rem] flex items-center justify-between">
+      <div class="mt-12 1xl:w-[64rem] flex items-center gap-x-8">
          <div class="flex flex-col justify-between w-[35rem] h-[35rem]">
             <div class="w-full flex justify-between">
                <router-link to="/kanban" class="hover:bg-[#d1d5db] shadow w-[16.5rem] h-[10.5rem] flex justify-center items-center rounded-3xl bg-white">
@@ -99,9 +99,9 @@
                </router-link>
             </div>
          </div>
-         <div class="w-96 h-32 flex-col justify-center items-start gap-3 inline-flex">
-            <div class="w-full text-gray-700 text-5xl font-medium leading-10">Good morning,</div>
-            <div class="w-full text-sky-500 text-6xl font-bold leading-10">Sofia Müller</div>
+         <div class="h-32 flex-col justify-center items-start gap-8 xl:inline-flex hidden">
+            <div class="w-full text-gray-700 text-5xl font-medium leading-10">Hello,</div>
+            <div class="w-full text-sky-500 text-6xl font-bold leading-10">Visitors</div>
          </div>
       </div>
    </div>
@@ -151,12 +151,4 @@ function getTotalFilteredTasks(data) {
    return totalFilteredTasks;
 }
 </script>
-<style scoped>
-.h-4_5rem {
-   height: 4.5rem;
-}
-
-.w-40rem {
-   width: 40rem;
-}
-</style>
+<style scoped></style>

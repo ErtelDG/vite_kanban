@@ -15,6 +15,8 @@ export default {
          md2: "768px",
          // => @media (min-width: 768px) { ... }
 
+         md3: "960px",
+
          lg: "1024px",
          // => @media (min-width: 1024px) { ... }
 
@@ -34,5 +36,4 @@ export default {
          display: ["group-hover"],
       },
    },
-
 };

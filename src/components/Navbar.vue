@@ -1,12 +1,9 @@
 <script setup></script>
 
 <template>
-   <div class="w-full h-full flex justify-between items-center">
-      <div class="text-xl font-medium text-black">Kanban Project Management Tool</div>
+   <div class="w-full h-full flex justify-end sm2:justify-between items-center">
+      <div class="text-xl font-medium text-black hidden sm2:block">Kanban Project Management Tool</div>
       <div class="flex items-center gap-4">
-         <div class="w-8 h-8 rounded-full flex justify-center items-center hover:cursor-pointer">
-            <img class="rounded-full" src="../assets/help.svg" alt="" srcset="" />
-         </div>
          <div class="relative inline-block dropdown">
             <div class="flex flex-col items-center justify-center w-14 h-14 border-black border-4 rounded-full hover:bg-[#d2d7de] hover:cursor-pointer">
                <div class="text-base text-[#29ABE2]">SM</div>
