@@ -27,4 +27,4 @@ jobs:
           password: ${{ secrets.ftp_password }}
 
       - name: Create test file
-        run: echo "TESTINHALT" | sudo ssh ${{ secrets.ftp_user }}@${{ secrets.ftp_server }} "sudo tee /var/TESTDATEI > /dev/null"
+        run: echo "TESTINHALT" | tee /var/TESTDATEI > /dev/null
