@@ -1,10 +1,20 @@
 #!/bin/bash
 
-#Tailwindcss optimizing for production
-npx tailwindcss -o src/build.css --minify
+# Tailwindcss optimizing for production
+if npx tailwindcss -o src/build.css --minify; then
+    echo "TailwindCSS optimization successful."
+else
+    echo "Error: TailwindCSS optimization failed. Exiting without further actions."
+    exit 1
+fi
 
 # Git Pull to fetch changes from the remote repository
-git pull
+if git pull; then
+    echo "Git pull successful."
+else
+    echo "Error: Git pull failed. Exiting without further actions."
+    exit 1
+fi
 
 # Add all changes
 git add .
@@ -16,7 +26,17 @@ unix_time=$(date +%s)
 commit_message="Commit: $unix_time"
 
 # Execute the commit command with the generated commit message
-git commit -m "$commit_message"
+if git commit -m "$commit_message"; then
+    echo "Commit successful."
+else
+    echo "Error: Commit failed. Exiting without further actions."
+    exit 1
+fi
 
 # Upload changes to the remote repository
-git push
+if git push; then
+    echo "Push to remote repository successful."
+else
+    echo "Error: Push to remote repository failed."
+    exit 1
+fi
