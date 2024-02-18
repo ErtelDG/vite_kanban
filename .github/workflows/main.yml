@@ -13,6 +13,9 @@ jobs:
       - name: Create SSH directory
         run: mkdir -p ~/.ssh
         
+      - name: Check if known_hosts exists
+        run: test -f ~/.ssh/known_hosts || touch ~/.ssh/known_hosts
+        
       - name: Add host key to known hosts
         run: ssh-keyscan -H ${{ secrets.ftp_server }} >> ~/.ssh/known_hosts
 
