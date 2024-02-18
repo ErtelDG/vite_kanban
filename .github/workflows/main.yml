@@ -29,5 +29,5 @@ jobs:
       - name: Create test file
         run: |
           cd /var/
-           sudo touch /var/testdatei
+          sudo touch /var/testdatei
 
