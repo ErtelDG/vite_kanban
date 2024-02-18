@@ -29,7 +29,7 @@ jobs:
         npm run build    
     - name: connect and pull
       run: |
-        cd /dist
-        scp *.* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/join    
+        cd dist
+        scp -r dist/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/join    
     - name: cleanup
       run: rm -rf ~/.ssh
