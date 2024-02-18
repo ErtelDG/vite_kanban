@@ -30,6 +30,6 @@ jobs:
     - name: connect and pull
       run: |
         cd dist
-        scp -r dist/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/join    
+        scp -r * ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/join    
     - name: cleanup
       run: rm -rf ~/.ssh
