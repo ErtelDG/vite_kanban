@@ -19,9 +19,6 @@ jobs:
       - name: Add host key to known hosts
         run: ssh-keyscan -H ${{ secrets.ftp_server }} >> ~/.ssh/known_hosts
 
-      - name: Debug ssh-keyscan
-        run: ssh-keyscan -H ${{ secrets.ftp_server }}
-
       - name: SSH into server
         uses: appleboy/ssh-action@master
         with:
