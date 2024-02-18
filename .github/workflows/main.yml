@@ -28,4 +28,4 @@ jobs:
       run: npm run build
 
     - name: Upload files via SCP
-      run: sshpass -p ${{ secrets.SSH_PASSWORD }} scp -r dist/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/join
+      run: ssh ${{ secrets.SSH_USERNAME }}@{{ secrets.SSH_HOST }}      
