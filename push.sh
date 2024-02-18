@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Tailwindcss optimizing for production
+npx tailwindcss -o src/build.css --minify
+
 # Git Pull to fetch changes from the remote repository
 git pull
 
