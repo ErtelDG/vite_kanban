@@ -8,7 +8,7 @@
          <Sidebar></Sidebar>
       </div>
       <div
-         class="w-full md3:w-[calc(100%-15rem)] h-[calc(100%-6rem)] md3:h-[calc(100vh-6rem)] flex justify-center items-center absolute right-0 bottom-0 bg-[#F6F7F8] overflow-scroll"
+         class="w-full md3:w-[calc(100%-15rem)] h-[calc(100%-6rem)] md3:h-[calc(100vh-6rem)] flex justify-center items-center absolute right-0 bottom-0 bg-[#F6F7F8] overflow-hidden"
       >
          <router-view> </router-view>
       </div>
@@ -31,4 +31,9 @@ onMounted(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+::-webkit-scrollbar {
+   width: 0px;
+   background: #f6f7f8; /* make scrollbar transparent */
+}
+</style>
