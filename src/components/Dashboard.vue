@@ -6,7 +6,7 @@
          <div class="h-full w-72 p-2 hidden sm2:flex items-center text-2xl">Key Metrics at a Glance</div>
       </div>
 
-      <div class="mt-12 1xl:w-[64rem] flex items-center gap-x-8">
+      <div class="mt-12 1xl:w-[64rem] flex items-center gap-x-8 bg-[#F6F7F8]">
          <div class="flex flex-col justify-between items-center w-[35rem] sm:h-[35rem] gap-8">
             <div class="w-full flex flex-col items-center sm:flex-row sm:items-stretch gap-8 justify-between">
                <router-link to="/kanban" class="hover:bg-[#d1d5db] shadow w-[16.5rem] h-[10.5rem] flex justify-center items-center rounded-3xl bg-white">

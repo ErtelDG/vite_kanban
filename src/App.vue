@@ -1,5 +1,5 @@
 <template>
-   <div class="w-screen min-h-screen" style="overflow: hidden; overflow-x: hidden; overflow-y: hidden">
+   <div class="w-screen md3:min-h-screen md3:overflow-hidden">
       <div class="h-24 w-full z-20 absolute top-0 left-0 right-0 py-5 pr-10 md3:pl-80 bg-white">
          <Navbar></Navbar>
       </div>
@@ -8,7 +8,7 @@
          <Sidebar></Sidebar>
       </div>
       <div
-         class="w-full md3:w-[calc(100%-15rem)] h-[calc(100%-6rem)] md3:h-[calc(100vh-6rem)] flex justify-center items-center absolute right-0 bottom-0 bg-[#F6F7F8] overflow-hidden"
+         class="w-full md3:w-[calc(100%-15rem)] h-[calc(100%-6rem)] md3:h-[calc(100vh-6rem)] flex justify-center items-center absolute right-0 bottom-0 bg-[#F6F7F8] md3:overflow-hidden"
       >
          <router-view> </router-view>
       </div>

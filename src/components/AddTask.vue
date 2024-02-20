@@ -58,10 +58,10 @@ const updatePrio = (value) => {
 </script>
 
 <template>
-   <div class="w-full h-full pl-16 flex flex-col justify-start pt-8">
+   <div class="w-full h-full pl-16 flex flex-col justify-start pt-8 overflow-scroll">
       <div class="text-black text-6xl font-bold">Add Task</div>
-      <form class="flex mt-12 h-[26rem]" @submit.prevent="add_new_task">
-         <div class="w-[27.5rem] h-full flex flex-col justify-between items-end">
+      <form class="flex flex-col xl:flex-row mt-12 xl:h-[26rem] mr-16" @submit.prevent="add_new_task">
+         <div class="sm:min-w-[27.5rem] h-full flex flex-col justify-between items-end">
             <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
                <div class="self-stretch">
                   <span class="text-gray-700 text-xl font-normal leading-normal">Title</span>
@@ -110,8 +110,8 @@ const updatePrio = (value) => {
                </select>
             </div>
          </div>
-         <div class="w-24 h-full flex justify-center items-center"><div class="h-full w-1 rounded-3xl bg-[#D1D1D1]"></div></div>
-         <div class="w-[27.5rem] h-full flex flex-col justify-between">
+         <div class="hidden w-24 h-full xl:flex justify-center items-center"><div class="h-full w-1 rounded-3xl bg-[#D1D1D1]"></div></div>
+         <div class="sm:min-w-[27.5rem] h-full flex flex-col justify-between">
             <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
                <div>
                   <span class="text-gray-700 text-xl font-normal leading-normal">Due date</span>
@@ -125,30 +125,30 @@ const updatePrio = (value) => {
             </div>
             <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
                <div class="text-black text-xl font-normal leading-normal">Prio</div>
-               <div class="flex justify-between w-full">
-                  <input v-on:change="updatePrio('Urgent')" type="radio" id="urgent" value="Urgent" required />
+               <div class="flex flex-col sm:flex-row justify-between w-full gap-4">
+                  <input @click="updatePrio('Urgent')" type="radio" id="urgent" value="Urgent" required class="hidden" />
                   <label
                      for="urgent"
                      :style="{ backgroundColor: add_prio === 'Urgent' ? 'lightgrey' : '' }"
-                     class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 w-full py-1 grow shrink basis-0 rounded-lg shadow gap-2 mr-2 hover:cursor-pointer"
+                     class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 sm:w-32 py-1 grow shrink basis-0 rounded-lg shadow gap-2 hover:cursor-pointer"
                      ><div>Urgent</div>
                      <img src="../assets/prio_alta_red.svg" alt="" srcset=""
                   /></label>
 
-                  <input v-on:change="updatePrio('Medium')" type="radio" id="medium" value="Medium" />
+                  <input @click="updatePrio('Medium')" type="radio" id="medium" value="Medium" />
                   <label
                      for="medium"
                      :style="{ backgroundColor: add_prio === 'Medium' ? 'lightgrey' : '' }"
-                     class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 mx-2 hover:cursor-pointer"
+                     class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 sm:w-32 py-1 grow shrink basis-0 rounded-lg shadow gap-2 hover:cursor-pointer"
                      ><div>Medium</div>
                      <img src="../assets/prio_media_white.svg" alt="" srcset=""
                   /></label>
 
-                  <input v-on:change="updatePrio('Low')" type="radio" id="low" value="Low" />
+                  <input @click="updatePrio('Low')" type="radio" id="low" value="Low" />
                   <label
                      for="low"
                      :style="{ backgroundColor: add_prio === 'Low' ? 'lightgrey' : '' }"
-                     class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
+                     class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 sm:w-32 py-1 grow shrink basis-0 rounded-lg shadow gap-2 hover:cursor-pointer"
                      ><div>Low</div>
                      <img src="../assets/prio_low_green.svg" alt="" srcset=""
                   /></label>
@@ -168,7 +168,7 @@ const updatePrio = (value) => {
                </select>
                <div class="w-full h-3"></div>
             </div>
-            <div class="h-14 flex justify-end items-center gap-4">
+            <div class="h-14 flex justify-center sm:justify-end items-center gap-4">
                <div
                   @click="clear_input"
                   class="w-28 h-full p-4 bg-neutral-100 rounded-lg border border-gray-700 justify-center items-center gap-1 flex hover:cursor-pointer hover:bg-[#d1d5db]"

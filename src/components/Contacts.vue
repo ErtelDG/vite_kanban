@@ -3,9 +3,9 @@
       <SlideNewContact></SlideNewContact>
    </div>
 
-   <div class="w-full h-full pl-16 pt-8 pb-8">
-      <div class="w-[70rem] h-full">
-         <div class="w-full flex justify-between items-center py-2">
+   <div class="w-full h-full sm:pl-16 pt-8 pb-8">
+      <div class="max-w-[70rem] h-full sm:mr-8 flex flex-col justify-center">
+         <div class="w-full flex justify-between items-center py-2 px-4 sm:pl-0">
             <button
                @click="toggleSlideNewContact"
                class="w-80 py-3 bg-gray-700 rounded-lg border border-gray-700 justify-center items-center gap-4 inline-flex hover:bg-gray-600 hover:cursor-pointer"
@@ -15,7 +15,7 @@
                   <div class="w-8 h-8 left-0 top-0 absolute"><img src="../assets/person_add.svg" alt="" srcset="" /></div>
                </div>
             </button>
-            <div class="h-20 flex justify-between items-center gap-7">
+            <div class="h-20 hidden xl:flex justify-between items-center gap-7">
                <div class="text-black text-6xl font-bold leading-10">Contacts</div>
                <div class="h-5/6 rounded-lg w-1 bg-[#29ABE2]"></div>
                <div class="text-gray-700 text-2xl font-normal leading-loose">Better with a team</div>
@@ -29,11 +29,11 @@
                <div class="w-full p-3 flex flex-wrap gap-4">
                   <div v-for="contacts in alpha">
                      <div
-                        class="min-w-64 h-24 px-6 py-3.5 bg-white rounded-lg justify-start items-center gap-9 inline-flex shadow-sm"
+                        class="min-w-64 sm:h-24 px-6 py-3.5 bg-white rounded-lg justify-start items-center gap-9 inline-flex shadow-sm"
                         v-for="(contact, id) in contacts"
                         :key="id"
                      >
-                        <div class="bg-white rounded-3xl justify-center items-center gap-2.5 flex">
+                        <div class="bg-white rounded-3xl justify-center items-center gap-2.5 sm:flex hidden">
                            <div class="w-10 h-10">
                               <div class="w-10 h-10 rounded-full border-2 border-white flex justify-center items-center bg-blue-600">
                                  <div class="text-white text-xs font-normal flex justify-center items-center">
