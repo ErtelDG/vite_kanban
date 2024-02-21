@@ -1,6 +1,6 @@
 <template>
-   <div class="w-full h-full pl-16 flex flex-col justify-start pt-8 gap-y-6">
-      <div class="w-[80rem] flex items-center justify-between">
+   <div class="w-full h-full pl-16 pr-16 flex flex-col justify-start pt-8 gap-y-6">
+      <div class="max-w-[80rem] flex flex-col gap-4 sm:flex-row items-center justify-between">
          <div class="text-black text-6xl font-bold flex items-center justify-center">Board</div>
 
          <div
@@ -13,13 +13,13 @@
             </div>
          </div>
       </div>
-      <div class="w-[80rem] h-[calc(100%-6rem)] flex justify-between">
-         <div class="w-full h-full px-2 border-x-2" v-for="(tasks, statusTask) in storeTasks" :key="statusTask">
-            <button class="w-full h-6 flex justify-center px-8">
+      <div class="3xl:w-[80rem] 3xl:h-[calc(100%-6rem)] flex flex-col 3xl:flex-row 3xl:justify-between overflow-scroll 3xl:overflow-hidden">
+         <div class="w-full h-full md:px-2 md:border-x-2" v-for="(tasks, statusTask) in storeTasks" :key="statusTask">
+            <button class="w-full h-8 flex justify-center md:justify-start 3xl:justify-center px-8">
                <div class="text-slate-600 text-xl font-bold">{{ statusTask }}</div>
             </button>
 
-            <div class="w-full max-h-full flex flex-wrap justify-center items-start gap-4 p-4 overflow-scroll">
+            <div class="w-full max-h-full flex flex-wrap flex-1 justify-center md:justify-start 3xl:justify-center items-start gap-8 p-4 overflow-scroll">
                <div
                   class="w-64 h-64 p-2 bg-white rounded-3xl shadow flex-col justify-center items-start inline-flex hover:cursor-pointer"
                   v-for="(task, task_id) in tasks"

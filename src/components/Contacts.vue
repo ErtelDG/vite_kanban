@@ -26,10 +26,10 @@
                <div class="w-full h-14 px-9 py-4 flex-col justify-center items-start gap-2 inline-flex border-b-2 border-[#D1D1D1] rounded-sm">
                   <div class="text-black text-xl font-normal leading-normal">{{ letter }}</div>
                </div>
-               <div class="w-full p-3 flex flex-wrap gap-4">
+               <div class="w-full p-3 flex flex-wrap justify-center sm:justify-start gap-4">
                   <div v-for="contacts in alpha">
                      <div
-                        class="min-w-64 sm:h-24 px-6 py-3.5 bg-white rounded-lg justify-start items-center gap-9 inline-flex shadow-sm"
+                        class="min-w-80 sm:min-w-96 sm:h-24 px-6 py-3.5 bg-white rounded-lg justify-start items-center gap-9 inline-flex shadow-sm"
                         v-for="(contact, id) in contacts"
                         :key="id"
                      >
