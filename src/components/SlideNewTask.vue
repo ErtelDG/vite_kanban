@@ -1,143 +1,149 @@
 <template>
-   <div class="bgSlideNew relative w-full h-full" :class="{ bgSlideNewClose: closeSlider }"></div>
-
-   <form
-      class="bg-white rounded-3xl absolute slideNew w-full h-hull flex flex-col items-center justify-center"
-      :class="{ slideClose: closeSlider }"
-      @submit.prevent="add_new_task"
-   >
-      <div class="">
-         <div class="text-black text-6xl font-bold w-full pb-6">Add Task</div>
-         <div class="flex h-[26rem] w-full">
-            <div class="w-[27.5rem] h-full flex flex-col justify-between items-end">
-               <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
-                  <div class="self-stretch">
-                     <span class="text-gray-700 text-xl font-normal leading-normal">Title</span>
-                  </div>
-                  <div class="self-stretch h-16 flex-col justify-start items-start gap-1 flex">
-                     <div class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-start items-center gap-2.5 inline-flex h-10">
-                        <input
-                           v-model="add_title"
-                           class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal outline-none"
-                           placeholder="Enter a title"
-                           required
-                        />
-                     </div>
-                     <div class="w-28 text-rose-400 text-xs font-normal leading-none" v-if="!add_title">This field is required</div>
-                  </div>
-               </div>
-               <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
-                  <div class="self-stretch text-gray-700 text-xl font-normal leading-normal">Description</div>
-                  <div class="self-stretch h-32 flex-col justify-start items-start gap-1 flex">
-                     <div class="self-stretch h-28 px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-start items-start gap-2.5 inline-flex">
-                        <textarea
-                           v-model="add_description"
-                           class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal outline-none h-full w-full"
-                           placeholder="Enter a Description"
-                           required
-                        ></textarea>
-                        <div class="w-5 h-5 left-[26rem] top-24 absolute">
-                           <div class="w-5 h-5 left-0 top-0 absolute"></div>
+   <div class="bgSlideNew absolute left-0 top-0 w-full h-full" :class="{ bgSlideNewClose: closeSlider }"></div>
+   <div class="w-full h-full flex justify-center items-center">
+      <div class="slideNew absolute left-0 top-0 w-full h-full flex justify-center pt-16" :class="{ slideClose: closeSlider }">
+         <form
+            class="rounded-3xl p-4 w-full sm:w-[32rem] md2:w-[42rem] md3:w-[36rem] lg:w-[42rem] 1xl:w-[64rem] h-5/6 1xl:h-3/4 flex flex-col items-center 1xl:justify-center left-20 overflow-scroll bg-white"
+            @submit.prevent="add_new_task"
+         >
+            <div class="flex flex-col w-full">
+               <div class="text-black text-6xl font-bold w-full pb-6 text-center 1xl:text-start">Add Task</div>
+               <div class="flex flex-col items-center 1xl:flex-row 1xl:items-stretch w-full gap-4">
+                  <div class="w-full sm:w-[27.5rem] h-full flex flex-col justify-between items-end gap-4 1xl:gap-0">
+                     <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
+                        <div class="self-stretch">
+                           <span class="text-gray-700 text-xl font-normal leading-normal">Title</span>
+                        </div>
+                        <div class="self-stretch h-16 flex-col justify-start items-start gap-1 flex">
+                           <div
+                              class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-start items-center gap-2.5 inline-flex h-10"
+                           >
+                              <input
+                                 v-model="add_title"
+                                 class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal outline-none"
+                                 placeholder="Enter a title"
+                                 required
+                              />
+                           </div>
+                           <div class="w-28 text-rose-400 text-xs font-normal leading-none" v-if="!add_title">This field is required</div>
                         </div>
                      </div>
-                     <div class="self-stretch text-rose-400 text-xs font-normal leading-none" v-if="!add_description">This field is required</div>
-                  </div>
-               </div>
-               <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
-                  <div class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal">Assigned to</div>
-                  <select
-                     v-model="add_assigned"
-                     required
-                     class="w-full px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex hover:cursor-pointer h-10"
-                  >
-                     <option label="Select contact to assign" class="text-[#9CA3AF] text-xl font-normal leading-normal"></option>
+                     <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
+                        <div class="self-stretch text-gray-700 text-xl font-normal leading-normal">Description</div>
+                        <div class="self-stretch h-32 flex-col justify-start items-start gap-1 flex">
+                           <div class="self-stretch h-28 px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-start items-start gap-2.5 inline-flex">
+                              <textarea
+                                 v-model="add_description"
+                                 class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal outline-none h-full w-full"
+                                 placeholder="Enter a Description"
+                                 required
+                              ></textarea>
+                              <div class="w-5 h-5 left-[26rem] top-24 absolute">
+                                 <div class="w-5 h-5 left-0 top-0 absolute"></div>
+                              </div>
+                           </div>
+                           <div class="self-stretch text-rose-400 text-xs font-normal leading-none" v-if="!add_description">This field is required</div>
+                        </div>
+                     </div>
+                     <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
+                        <div class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal">Assigned to</div>
+                        <select
+                           v-model="add_assigned"
+                           required
+                           class="w-full px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex hover:cursor-pointer h-10"
+                        >
+                           <option label="Select contact to assign" class="text-[#9CA3AF] text-xl font-normal leading-normal"></option>
 
-                     <option class="text-lg font-normal" v-for="(contact, id) in store_contacts" :key="id" :value="id" id="assigned-0">
-                        {{ contact.last_name }}, {{ contact.first_name }} <input type="hidden" />
-                     </option>
-                  </select>
+                           <option class="text-lg font-normal" v-for="(contact, id) in store_contacts" :key="id" :value="id" id="assigned-0">
+                              {{ contact.last_name }}, {{ contact.first_name }} <input type="hidden" />
+                           </option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="w-8 h-full flex justify-center items-center"><div class="h-full w-1 rounded-3xl bg-[#D1D1D1]"></div></div>
+                  <div class="w-full sm:w-[27.5rem] h-full flex flex-col justify-between">
+                     <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
+                        <div>
+                           <span class="text-gray-700 text-xl font-normal leading-normal">Due date</span>
+                        </div>
+                        <div class="self-stretch h-16 flex-col justify-start items-start gap-1 flex">
+                           <div
+                              class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex h-10 relative"
+                           >
+                              <input v-model="add_date" type="date" class="text-gray-700 text-xl font-normal leading-normal outline-none" required />
+                           </div>
+                           <div class="self-stretch text-rose-400 text-xs font-normal leading-none" v-if="!add_date">This field is required</div>
+                        </div>
+                     </div>
+                     <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
+                        <div class="text-black text-xl font-normal leading-normal">Prio</div>
+                        <div class="flex flex-col sm:flex-row sm:justify-between w-full">
+                           <input class="" v-on:change="updatePrio('Urgent')" type="radio" id="urgent" value="Urgent" required />
+                           <label
+                              for="urgent"
+                              :style="{ backgroundColor: add_prio === 'Urgent' ? 'lightgrey' : '' }"
+                              class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 w-full py-1 grow shrink basis-0 rounded-lg shadow gap-2 sm:mr-2 hover:cursor-pointer"
+                              ><div>Urgent</div>
+                              <img src="../assets/prio_alta_red.svg" alt="" srcset=""
+                           /></label>
+
+                           <input v-on:change="updatePrio('Medium')" type="radio" id="medium" value="Medium" />
+                           <label
+                              for="medium"
+                              :style="{ backgroundColor: add_prio === 'Medium' ? 'lightgrey' : '' }"
+                              class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 sm:mx-2 hover:cursor-pointer"
+                              ><div>Medium</div>
+                              <img src="../assets/prio_media_white.svg" alt="" srcset=""
+                           /></label>
+
+                           <input v-on:change="updatePrio('Low')" type="radio" id="low" value="Low" />
+                           <label
+                              for="low"
+                              :style="{ backgroundColor: add_prio === 'Low' ? 'lightgrey' : '' }"
+                              class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
+                              ><div>Low</div>
+                              <img src="../assets/prio_low_green.svg" alt="" srcset=""
+                           /></label>
+                        </div>
+                        <div class="w-full h-3"></div>
+                     </div>
+                     <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
+                        <div class="w-full grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal">Category</div>
+                        <select
+                           v-model="add_category"
+                           required
+                           class="w-full px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex hover:cursor-pointer h-10"
+                        >
+                           <option label="Select task category" class="text-[#9CA3AF] text-xl font-normal leading-normal"></option>
+
+                           <option class="text-lg font-normal" v-for="(category, id) in store_categories" :key="id" :value="id">{{ category }}</option>
+                        </select>
+                        <div class="w-full h-3"></div>
+                     </div>
+                     <div class="h-14 flex justify-end items-center gap-4">
+                        <div
+                           @click="toggleSlideNewTask"
+                           class="w-28 h-full p-4 bg-neutral-100 rounded-lg border border-gray-700 justify-center items-center gap-1 flex hover:cursor-pointer hover:bg-[#d1d5db]"
+                        >
+                           <div class="text-gray-700 text-xl font-normal leading-normal">Cancel</div>
+                           <div class="w-6 h-6 flex justify-center items-center"><img src="../assets/iconoir_cancel.svg" alt="" srcset="" /></div>
+                        </div>
+                        <button
+                           type="submit"
+                           class="h-full p-4 bg-gray-700 rounded-lg justify-center items-center gap-1 flex w-48 hover:bg-gray-600 hover:cursor-pointer"
+                        >
+                           <div class="w-32 text-white text-xl font-normal leading-relaxed">Create Task</div>
+                           <div class="w-6 h-6 relative">
+                              <div class="w-6 h-6 left-0 top-0 absolute"><img src="../assets/check.svg" alt="" srcset="" /></div>
+                           </div>
+                        </button>
+                     </div>
+                  </div>
                </div>
             </div>
-            <div class="w-24 h-full flex justify-center items-center"><div class="h-full w-1 rounded-3xl bg-[#D1D1D1]"></div></div>
-            <div class="w-[27.5rem] h-full flex flex-col justify-between">
-               <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
-                  <div>
-                     <span class="text-gray-700 text-xl font-normal leading-normal">Due date</span>
-                  </div>
-                  <div class="self-stretch h-16 flex-col justify-start items-start gap-1 flex">
-                     <div class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex h-10 relative">
-                        <input v-model="add_date" type="date" class="text-gray-700 text-xl font-normal leading-normal outline-none" required />
-                     </div>
-                     <div class="self-stretch text-rose-400 text-xs font-normal leading-none" v-if="!add_date">This field is required</div>
-                  </div>
-               </div>
-               <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
-                  <div class="text-black text-xl font-normal leading-normal">Prio</div>
-                  <div class="flex justify-between w-full">
-                     <input v-on:change="updatePrio('Urgent')" type="radio" id="urgent" value="Urgent" required />
-                     <label
-                        for="urgent"
-                        :style="{ backgroundColor: add_prio === 'Urgent' ? 'lightgrey' : '' }"
-                        class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 w-full py-1 grow shrink basis-0 rounded-lg shadow gap-2 mr-2 hover:cursor-pointer"
-                        ><div>Urgent</div>
-                        <img src="../assets/prio_alta_red.svg" alt="" srcset=""
-                     /></label>
-
-                     <input v-on:change="updatePrio('Medium')" type="radio" id="medium" value="Medium" />
-                     <label
-                        for="medium"
-                        :style="{ backgroundColor: add_prio === 'Medium' ? 'lightgrey' : '' }"
-                        class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 mx-2 hover:cursor-pointer"
-                        ><div>Medium</div>
-                        <img src="../assets/prio_media_white.svg" alt="" srcset=""
-                     /></label>
-
-                     <input v-on:change="updatePrio('Low')" type="radio" id="low" value="Low" />
-                     <label
-                        for="low"
-                        :style="{ backgroundColor: add_prio === 'Low' ? 'lightgrey' : '' }"
-                        class="flex justify-center items-center text-black text-xl font-normal leading-normal px-6 h-14 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
-                        ><div>Low</div>
-                        <img src="../assets/prio_low_green.svg" alt="" srcset=""
-                     /></label>
-                  </div>
-                  <div class="w-full h-3"></div>
-               </div>
-               <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
-                  <div class="w-full grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal">Category</div>
-                  <select
-                     v-model="add_category"
-                     required
-                     class="w-full px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex hover:cursor-pointer h-10"
-                  >
-                     <option label="Select task category" class="text-[#9CA3AF] text-xl font-normal leading-normal"></option>
-
-                     <option class="text-lg font-normal" v-for="(category, id) in store_categories" :key="id" :value="id">{{ category }}</option>
-                  </select>
-                  <div class="w-full h-3"></div>
-               </div>
-               <div class="h-14 flex justify-end items-center gap-4">
-                  <div
-                     @click="toggleSlideNewTask"
-                     class="w-28 h-full p-4 bg-neutral-100 rounded-lg border border-gray-700 justify-center items-center gap-1 flex hover:cursor-pointer hover:bg-[#d1d5db]"
-                  >
-                     <div class="text-gray-700 text-xl font-normal leading-normal">Cancel</div>
-                     <div class="w-6 h-6 flex justify-center items-center"><img src="../assets/iconoir_cancel.svg" alt="" srcset="" /></div>
-                  </div>
-                  <button
-                     type="submit"
-                     class="h-full p-4 bg-gray-700 rounded-lg justify-center items-center gap-1 flex w-48 hover:bg-gray-600 hover:cursor-pointer"
-                  >
-                     <div class="w-32 text-white text-xl font-normal leading-relaxed">Create Task</div>
-                     <div class="w-6 h-6 relative">
-                        <div class="w-6 h-6 left-0 top-0 absolute"><img src="../assets/check.svg" alt="" srcset="" /></div>
-                     </div>
-                  </button>
-               </div>
-            </div>
-         </div>
+         </form>
       </div>
-   </form>
+   </div>
 </template>
 
 <script setup>
@@ -215,6 +221,7 @@ const toggleSlideNewTask = () => {
    opacity: 0.8;
    animation-name: bgSlideNewContactAnimation;
    animation-duration: 1s;
+   z-index: 0;
 }
 
 @keyframes bgSlideNewContactAnimation {
@@ -246,11 +253,6 @@ const toggleSlideNewTask = () => {
    }
 }
 .slideNew {
-   left: calc(50% - (76rem / 2) - 7.5rem);
-   top: 4rem;
-   width: 76rem;
-   height: 37rem;
-   background-color: white;
    animation-name: slideNewContactIn;
    animation-duration: 1.5s;
 }
@@ -260,22 +262,21 @@ const toggleSlideNewTask = () => {
       left: 100%;
    }
    to {
-      left: calc(50% - (76rem / 2) - 7.5rem);
+      left: 0%;
    }
 }
 
 .slideClose {
-   left: 100vw;
    animation-name: slideCloseOut;
    animation-duration: 1.5s;
 }
 
 @keyframes slideCloseOut {
    from {
-      left: calc(50% - (76rem / 2) - 7.5rem);
+      left: 0%;
    }
    to {
-      left: 100vw;
+      left: 100%;
    }
 }
 
