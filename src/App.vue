@@ -24,7 +24,6 @@ import Sidebar from "./components/Sidebar.vue";
 const store = useStore();
 
 onMounted(() => {
-   alert("Please use a minimum width of 960px for desktop view.");
    store.dispatch("fetchData", "contacts");
    store.dispatch("fetchData", "categories");
    store.dispatch("fetchData", "tasks");

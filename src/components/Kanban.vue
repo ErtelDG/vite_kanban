@@ -59,7 +59,9 @@
                               </div>
                            </div>
                            <div class="w-6 h-6 rounded-full justify-center items-center flex" :style="{ backgroundColor: prioBackgroundColor(task.prio) }">
-                              <img class="w-4 h-4" :src="`../assets/${task.prio}_transparent.svg`" alt="" srcset="" />
+                              <div v-if="task.prio == 'Medium'"><img class="w-4 h-4" src="../assets/Medium_transparent.svg" alt="" srcset="" /></div>
+                              <div v-if="task.prio == 'Low'"><img class="w-4 h-4" src="../assets/Low_transparent.svg" alt="" srcset="" /></div>
+                              <div v-if="task.prio == 'Urgent'"><img class="w-4 h-4" src="../assets/Urgent_transparent.svg" alt="" srcset="" /></div>
                            </div>
                         </div>
                      </div>
