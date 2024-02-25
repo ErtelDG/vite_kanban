@@ -70,7 +70,7 @@ const updatePrio = (value) => {
                   <div class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-start items-center gap-2.5 inline-flex h-10">
                      <input
                         v-model="add_title"
-                        class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal outline-none"
+                        class="w-full grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal outline-none"
                         placeholder="Enter a title"
                         required
                      />
@@ -125,7 +125,7 @@ const updatePrio = (value) => {
             </div>
             <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
                <div class="text-black text-xl font-normal leading-normal">Prio</div>
-               <div class="flex flex-col sm:flex-row justify-between w-full gap-4">
+               <div class="flex flex-col sm:flex-row justify-between w-full sm:gap-4">
                   <input @click="updatePrio('Urgent')" type="radio" id="urgent" value="Urgent" required class="hidden" />
                   <label
                      for="urgent"
@@ -168,10 +168,10 @@ const updatePrio = (value) => {
                </select>
                <div class="w-full h-3"></div>
             </div>
-            <div class="h-14 flex justify-center sm:justify-end items-center gap-4">
+            <div class="sm:h-14 flex flex-col sm:flex-row justify-center sm:justify-end items-center gap-4">
                <div
                   @click="clear_input"
-                  class="w-28 h-full p-4 bg-neutral-100 rounded-lg border border-gray-700 justify-center items-center gap-1 flex hover:cursor-pointer hover:bg-[#d1d5db]"
+                  class="w-48 sm:w-28 h-full p-4 bg-neutral-100 rounded-lg border border-gray-700 justify-center items-center gap-1 flex hover:cursor-pointer hover:bg-[#d1d5db]"
                >
                   <div class="text-gray-700 text-xl font-normal leading-normal">Clear</div>
                   <div class="w-6 h-6 relative"><img src="../assets/iconoir_cancel.svg" alt="" srcset="" /></div>

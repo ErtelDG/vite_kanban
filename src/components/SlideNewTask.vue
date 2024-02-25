@@ -1,7 +1,7 @@
 <template>
    <div class="bgSlideNew absolute left-0 top-0 w-full h-full" :class="{ bgSlideNewClose: closeSlider }"></div>
    <div class="w-full h-full flex justify-center items-center">
-      <div class="slideNew absolute left-0 top-0 w-full h-full flex justify-center pt-16" :class="{ slideClose: closeSlider }">
+      <div class="slideNew absolute left-0 top-0 w-full h-full flex justify-center pt-16 xl:-ml-12" :class="{ slideClose: closeSlider }">
          <form
             class="rounded-3xl p-4 w-full sm:w-[32rem] md2:w-[42rem] md3:w-[36rem] lg:w-[42rem] 1xl:w-[64rem] h-5/6 1xl:h-3/4 flex flex-col items-center 1xl:justify-center left-20 overflow-scroll bg-white"
             @submit.prevent="add_new_task"
@@ -219,12 +219,12 @@ const toggleSlideNewTask = () => {
 .bgSlideNew {
    background-color: rgb(229 231 235);
    opacity: 0.8;
-   animation-name: bgSlideNewContactAnimation;
+   animation-name: bgSlideNewTaskAnimation;
    animation-duration: 1s;
    z-index: 0;
 }
 
-@keyframes bgSlideNewContactAnimation {
+@keyframes bgSlideNewTaskAnimation {
    from {
       background-color: rgb(229 231 235);
       opacity: 0;
@@ -253,11 +253,11 @@ const toggleSlideNewTask = () => {
    }
 }
 .slideNew {
-   animation-name: slideNewContactIn;
+   animation-name: slideNewTaskIn;
    animation-duration: 1.5s;
 }
 
-@keyframes slideNewContactIn {
+@keyframes slideNewTaskIn {
    from {
       left: 100%;
    }

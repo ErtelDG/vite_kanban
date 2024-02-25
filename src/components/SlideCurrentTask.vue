@@ -1,237 +1,245 @@
 <template>
    <div class="bgSlideNew relative w-full h-full" :class="{ bgSlideNewClose: closeSlider }"></div>
-
-   <form
-      class="bg-white rounded-3xl absolute slideNew w-full h-hull flex items-center justify-center"
-      :class="{ slideClose: closeSlider }"
-      @submit.prevent="updateCurrentTask"
-   >
-      <div class="w-[64rem] h-full flex flex-col items-center p-4">
-         <div class="pb-4 w-full">
-            <input
-               class="text-black text-5xl font-bold w-full outline-none p-2"
-               :class="{ 'rounded-lg': isEditable, border: isEditable, 'border-neutral-300': isEditable }"
-               v-model="current_title"
-               required
-               :readonly="!isEditable"
-            />
-
-            <div class="w-full h-4 text-rose-400 text-xs font-normal leading-none pl-2" v-if="!current_title">This field is required</div>
-         </div>
-         <div class="flex h-full w-full justify-center">
-            <div class="w-[27.5rem] h-full flex flex-col justify-between items-end">
-               <div class="w-full justify-between items-start gap-2 inline-flex">
-                  <div class="w-18">
-                     <span class="text-gray-700 text-xl font-normal leading-normal">Due date:</span>
-                  </div>
-                  <div class="self-stretch h-16 flex-col justify-start items-start gap-1 flex w-3/4">
-                     <div class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex h-10 relative">
-                        <input
-                           v-model="current_date"
-                           type="date"
-                           class="text-gray-700 text-xl font-normal leading-normal outline-none"
-                           required
-                           :readonly="!isEditable"
-                        />
-                     </div>
-                     <div class="self-stretch text-rose-400 text-xs font-normal leading-none" v-if="!current_date">This field is required</div>
-                  </div>
-               </div>
-               <div class="w-full flex-col justify-between items-center gap-4">
-                  <div class="text-black text-xl font-normal leading-normal pb-2">Priority:</div>
-                  <div class="flex justify-between w-full">
-                     <input @click="updatePrio('Urgent')" type="radio" id="urgent" value="Urgent" :disabled="!isEditable" />
-                     <label
-                        for="urgent"
-                        :style="{ backgroundColor: current_prio === 'Urgent' ? 'lightgrey' : '' }"
-                        class="flex justify-center items-center text-black text-xl font-normal leading-normal px-4 h-10 w-full py-1 grow shrink basis-0 rounded-lg shadow gap-2 mr-2 hover:cursor-pointer"
-                        ><div>Urgent</div>
-                        <img src="../assets/prio_alta_red.svg" alt="" srcset=""
-                     /></label>
-
-                     <input @click="updatePrio('Medium')" type="radio" id="medium" value="Medium" :disabled="!isEditable" />
-                     <label
-                        for="medium"
-                        :style="{ backgroundColor: current_prio === 'Medium' ? 'lightgrey' : '' }"
-                        class="flex justify-center items-center text-black text-xl font-normal leading-normal px-4 h-10 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 mx-2 hover:cursor-pointer"
-                        ><div>Medium</div>
-                        <img src="../assets/prio_media_white.svg" alt="" srcset=""
-                     /></label>
-
-                     <input @click="updatePrio('Low')" type="radio" id="low" value="Low" :disabled="!isEditable" />
-                     <label
-                        for="low"
-                        :style="{ backgroundColor: current_prio === 'Low' ? 'lightgrey' : '' }"
-                        class="flex justify-center items-center text-black text-xl font-normal leading-normal px-4 h-10 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
-                        ><div>Low</div>
-                        <img src="../assets/prio_low_green.svg" alt="" srcset=""
-                     /></label>
-                  </div>
-                  <div class="w-full h-3"></div>
-               </div>
-               <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
-                  <div class="self-stretch text-gray-700 text-xl font-normal leading-normal">Description</div>
-                  <div class="self-stretch h-full flex-col justify-start items-start gap-1 flex">
-                     <div class="self-stretch h-40 px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-start items-start gap-2.5 inline-flex">
-                        <textarea
-                           v-model="current_description"
-                           class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal outline-none h-full w-full"
-                           placeholder="Enter a Description"
-                           required
-                           :readonly="!isEditable"
-                        ></textarea>
-                        <div class="w-5 h-5 left-[26rem] top-24 absolute">
-                           <div class="w-5 h-5 left-0 top-0 absolute"></div>
-                        </div>
-                     </div>
-                     <div class="self-stretch text-rose-400 text-xs font-normal leading-none h-4">
-                        <div v-if="!current_description">This field is required</div>
-                     </div>
-                  </div>
-               </div>
-               <div class="w-full flex-col justify-start items-start gap-2 inline-flex pb-4">
-                  <div class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal">Assigned to</div>
-                  <select
-                     v-model="current_assigned"
+   <div class="w-full h-full flex justify-center items-center">
+      <div class="slideNew absolute left-0 top-0 w-full h-full flex justify-center pt-16 3xl:-ml-12" :class="{ slideClose: closeSlider }">
+         <form
+            class="rounded-3xl p-4 w-full sm:w-[32rem] md2:w-[42rem] md3:w-[36rem] lg:w-[42rem] 1xl:w-[64rem] h-5/6 flex flex-col items-center 1xl:justify-center left-20 bg-white"
+            @submit.prevent="updateCurrentTask"
+         >
+            <div class="w-full h-full flex flex-col items-center p-4">
+               <div class="pb-4 w-full">
+                  <input
+                     class="text-black text-1xl sm:text-3xl md2:text-5xl font-bold h-full w-full outline-none p-2"
+                     :class="{ 'rounded-lg': isEditable, border: isEditable, 'border-neutral-300': isEditable }"
+                     v-model="current_title"
                      required
-                     :disabled="!isEditable"
-                     class="w-full px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex hover:cursor-pointer h-10"
-                  >
-                     <option label="Select contact to assign" class="text-[#9CA3AF] text-xl font-normal leading-normal"></option>
-
-                     <option class="text-lg font-normal" v-for="(contact, id) in store_contacts" :key="id" :value="id" id="assigned-0">
-                        {{ contact.last_name }}, {{ contact.first_name }} <input type="hidden" />
-                     </option>
-                  </select>
+                     :readonly="!isEditable"
+                  />
+                  <div class="w-full h-4 text-rose-400 text-xs font-normal leading-none pl-2" v-if="!current_title">This field is required</div>
                </div>
-            </div>
-            <div class="w-24 h-full flex justify-center items-center"><div class="h-full w-1 rounded-3xl bg-[#D1D1D1]"></div></div>
-            <div class="w-[27.5rem] h-full flex flex-col justify-between gap-4">
-               <div class="w-full flex flex-col justify-between items-start gap-4 pb-4">
-                  <div class="w-full flex-col justify-between items-center gap-4">
-                     <div class="text-black text-xl font-normal leading-normal pb-2">Status:</div>
-                     <div class="flex justify-between w-full">
-                        <input @click="updateStatus('ToDo')" type="radio" id="todo" value="ToDo" :disabled="!isEditable" />
-                        <label
-                           for="todo"
-                           :style="{ backgroundColor: current_status === 'ToDo' ? 'lightgrey' : '' }"
-                           class="flex justify-center items-center text-black text-lg font-normal leading-normal px-4 h-8 w-full py-1 grow shrink basis-0 rounded-lg shadow gap-2 mr-2 hover:cursor-pointer"
-                           ><div>ToDo</div>
-                        </label>
-
-                        <input @click="updateStatus('Progress')" type="radio" id="progress" value="Progress" :disabled="!isEditable" />
-                        <label
-                           for="progress"
-                           :style="{ backgroundColor: current_status === 'Progress' ? 'lightgrey' : '' }"
-                           class="flex justify-center items-center text-black text-lg font-normal leading-normal px-4 h-8 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 mx-2 hover:cursor-pointer"
-                           ><div>Progress</div>
-                        </label>
-
-                        <input @click="updateStatus('Feedback')" type="radio" id="feedback" value="Feedback" :disabled="!isEditable" />
-                        <label
-                           for="feedback"
-                           :style="{ backgroundColor: current_status === 'Feedback' ? 'lightgrey' : '' }"
-                           class="flex justify-center items-center text-black text-lg font-normal leading-normal px-4 h-8 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
-                           ><div>Feedback</div>
-                        </label>
-                        <input @click="updateStatus('Done')" type="radio" id="done" value="Done" :disabled="!isEditable" />
-                        <label
-                           for="done"
-                           :style="{ backgroundColor: current_status === 'Done' ? 'lightgrey' : '' }"
-                           class="flex justify-center items-center text-black text-lg font-normal leading-normal px-4 h-8 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
-                           ><div>Done</div>
-                        </label>
-                     </div>
-                     <div class="w-full h-3"></div>
-                  </div>
-                  <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
-                     <div class="w-full grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal">Category</div>
-                     <select
-                        v-model="current_category"
-                        required
-                        :disabled="!isEditable"
-                        class="w-full px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex hover:cursor-pointer h-10"
-                     >
-                        <option label="Select task category" class="text-[#9CA3AF] text-xl font-normal leading-normal"></option>
-
-                        <option class="text-lg font-normal" v-for="(category, id) in store_categories" :key="id" :value="id">{{ category }}</option>
-                     </select>
-                     <div class="w-full h-3"></div>
-                  </div>
-                  <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
-                     <div class="w-full justify-between items-start gap-2 inline-flex">
+               <div class="flex flex-col 1xl:flex-row h-full w-full item-center overflow-scroll gap-4">
+                  <div class="w-full 1xl:w-[27.5rem] h-auto sm:h-full flex flex-col justify-between items-end">
+                     <div class="w-full justify-between items-start gap-2 inline-flex flex-col sm:flex-row">
                         <div class="w-18">
-                           <span class="text-gray-700 text-xl font-normal leading-normal">Subtask:</span>
+                           <span class="text-gray-700 text-xl font-normal leading-normal">Due date:</span>
                         </div>
-                        <div class="self-stretch flex-col justify-start items-start gap-1 flex w-3/4">
+                        <div class="self-stretch h-16 flex-col justify-start items-start gap-1 flex sm:w-3/4">
                            <div
-                              class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex h-8 relative"
+                              class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex h-10 relative"
                            >
                               <input
-                                 :disabled="!isEditable"
-                                 v-model="newItem"
-                                 type="text"
-                                 placeholder="Title..."
-                                 class="text-gray-700 text-base font-normal leading-normal outline-none"
+                                 v-model="current_date"
+                                 type="date"
+                                 class="text-gray-700 text-xl font-normal leading-normal outline-none"
+                                 required
+                                 :readonly="!isEditable"
                               />
                            </div>
+                           <div class="self-stretch text-rose-400 text-xs font-normal leading-none" v-if="!current_date">This field is required</div>
                         </div>
-                        <span
-                           @click="isEditable && addItem()"
-                           class="flex justify-center items-center text-black text-xl font-normal leading-normal px-4 h-8 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer hover:bg-[#D3D3D3]"
-                           >Add</span
+                     </div>
+                     <div class="w-full flex-col justify-between items-center gap-4">
+                        <div class="text-black text-xl font-normal leading-normal pb-2">Priority:</div>
+                        <div class="flex flex-col sm:flex-row justify-between w-full">
+                           <input @click="updatePrio('Urgent')" type="radio" id="urgent" value="Urgent" :disabled="!isEditable" />
+                           <label
+                              for="urgent"
+                              :style="{ backgroundColor: current_prio === 'Urgent' ? 'lightgrey' : '' }"
+                              class="flex justify-center items-center text-black text-xl font-normal leading-normal px-4 h-10 w-full py-1 grow shrink basis-0 rounded-lg shadow gap-2 sm:mr-2 hover:cursor-pointer"
+                              ><div>Urgent</div>
+                              <img src="../assets/prio_alta_red.svg" alt="" srcset=""
+                           /></label>
+
+                           <input @click="updatePrio('Medium')" type="radio" id="medium" value="Medium" :disabled="!isEditable" />
+                           <label
+                              for="medium"
+                              :style="{ backgroundColor: current_prio === 'Medium' ? 'lightgrey' : '' }"
+                              class="flex justify-center items-center text-black text-xl font-normal leading-normal px-4 h-10 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 sm:mx-2 hover:cursor-pointer"
+                              ><div>Medium</div>
+                              <img src="../assets/prio_media_white.svg" alt="" srcset=""
+                           /></label>
+
+                           <input @click="updatePrio('Low')" type="radio" id="low" value="Low" :disabled="!isEditable" />
+                           <label
+                              for="low"
+                              :style="{ backgroundColor: current_prio === 'Low' ? 'lightgrey' : '' }"
+                              class="flex justify-center items-center text-black text-xl font-normal leading-normal px-4 h-10 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
+                              ><div>Low</div>
+                              <img src="../assets/prio_low_green.svg" alt="" srcset=""
+                           /></label>
+                        </div>
+                        <div class="w-full h-3"></div>
+                     </div>
+                     <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
+                        <div class="self-stretch text-gray-700 text-xl font-normal leading-normal">Description</div>
+                        <div class="self-stretch h-full flex-col justify-start items-start gap-1 flex">
+                           <div class="self-stretch h-32 px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-start items-start gap-2.5 inline-flex">
+                              <textarea
+                                 v-model="current_description"
+                                 class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal outline-none h-full w-full"
+                                 placeholder="Enter a Description"
+                                 required
+                                 :readonly="!isEditable"
+                              ></textarea>
+                              <div class="w-5 h-5 left-[26rem] top-24 absolute">
+                                 <div class="w-5 h-5 left-0 top-0 absolute"></div>
+                              </div>
+                           </div>
+                           <div class="self-stretch text-rose-400 text-xs font-normal leading-none h-4">
+                              <div v-if="!current_description">This field is required</div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="w-full h-full flex-col justify-start items-start gap-2 inline-flex pb-4">
+                        <div class="grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal">Assigned to</div>
+                        <select
+                           v-model="current_assigned"
+                           required
+                           :disabled="!isEditable"
+                           class="w-full px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex hover:cursor-pointer h-10"
                         >
+                           <option label="Select contact to assign" class="text-[#9CA3AF] text-xl font-normal leading-normal"></option>
+
+                           <option class="text-lg font-normal" v-for="(contact, id) in store_contacts" :key="id" :value="id" id="assigned-0">
+                              {{ contact.last_name }}, {{ contact.first_name }} <input type="hidden" />
+                           </option>
+                        </select>
                      </div>
                   </div>
-                  <div class="w-full h-24 overflow-auto">
-                     <ul :class="{ 'no-select': !isEditable }">
-                        <li
-                           class="w-full flex"
-                           v-for="(item, index) in currentSubtasks"
-                           :key="index"
-                           :class="{ checked: item.checked }"
-                           @click="isEditable && toggleItem(index)"
-                           :style="{ 'no-select': !isEditable }"
+                  <div class="hidden w-full sm:w-24 h-full 1xl:flex justify-center items-center">
+                     <div class="h-full w-1 rounded-3xl bg-[#D1D1D1]"></div>
+                  </div>
+                  <div class="w-full 1xl:w-[27.5rem] h-full flex flex-col justify-between gap-4">
+                     <div class="w-full flex flex-col justify-between items-start gap-4 pb-4">
+                        <div class="w-full flex-col justify-between items-center gap-4">
+                           <div class="text-black text-xl font-normal leading-normal pb-2">Status:</div>
+                           <div class="flex justify-around flex-col sm:flex-row sm:justify-between w-full">
+                              <input @click="updateStatus('ToDo')" type="radio" id="todo" value="ToDo" :disabled="!isEditable" />
+                              <label
+                                 for="todo"
+                                 :style="{ backgroundColor: current_status === 'ToDo' ? 'lightgrey' : '' }"
+                                 class="flex justify-center items-center text-black text-lg font-normal leading-normal px-4 h-8 py-1 grow shrink basis-0 rounded-lg shadow gap-2 mx-2 sm:mr-2 hover:cursor-pointer"
+                                 ><div>ToDo</div>
+                              </label>
+
+                              <input @click="updateStatus('Progress')" type="radio" id="progress" value="Progress" :disabled="!isEditable" />
+                              <label
+                                 for="progress"
+                                 :style="{ backgroundColor: current_status === 'Progress' ? 'lightgrey' : '' }"
+                                 class="flex justify-center items-center text-black text-lg font-normal leading-normal px-4 h-8 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 mx-2 hover:cursor-pointer"
+                                 ><div>Progress</div>
+                              </label>
+
+                              <input @click="updateStatus('Feedback')" type="radio" id="feedback" value="Feedback" :disabled="!isEditable" />
+                              <label
+                                 for="feedback"
+                                 :style="{ backgroundColor: current_status === 'Feedback' ? 'lightgrey' : '' }"
+                                 class="flex justify-center items-center text-black text-lg font-normal leading-normal px-4 h-8 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
+                                 ><div>Feedback</div>
+                              </label>
+                              <input @click="updateStatus('Done')" type="radio" id="done" value="Done" :disabled="!isEditable" />
+                              <label
+                                 for="done"
+                                 :style="{ backgroundColor: current_status === 'Done' ? 'lightgrey' : '' }"
+                                 class="flex justify-center items-center text-black text-lg font-normal leading-normal px-4 h-8 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 ml-2 hover:cursor-pointer"
+                                 ><div>Done</div>
+                              </label>
+                           </div>
+                           <div class="w-full h-3"></div>
+                        </div>
+                        <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
+                           <div class="w-full grow shrink basis-0 text-gray-700 text-xl font-normal leading-normal">Category</div>
+                           <select
+                              v-model="current_category"
+                              required
+                              :disabled="!isEditable"
+                              class="w-full px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex hover:cursor-pointer h-10"
+                           >
+                              <option label="Select task category" class="text-[#9CA3AF] text-xl font-normal leading-normal"></option>
+
+                              <option class="text-lg font-normal" v-for="(category, id) in store_categories" :key="id" :value="id">{{ category }}</option>
+                           </select>
+                           <div class="w-full h-3"></div>
+                        </div>
+                        <div class="w-full flex-col justify-start items-start gap-2 inline-flex">
+                           <div class="w-full flex-col sm:flex-row justify-between items-start gap-2 inline-flex">
+                              <div class="w-18">
+                                 <span class="text-gray-700 text-xl font-normal leading-normal">Subtask:</span>
+                              </div>
+                              <div class="self-stretch flex-col justify-start items-start gap-1 flex w-full sm:w-3/4">
+                                 <div
+                                    class="self-stretch px-2 py-1 bg-white rounded-lg border border-neutral-300 justify-between items-center inline-flex h-8 relative"
+                                 >
+                                    <input
+                                       :disabled="!isEditable"
+                                       v-model="newItem"
+                                       type="text"
+                                       placeholder="Title..."
+                                       class="text-gray-700 text-base font-normal leading-normal outline-none"
+                                    />
+                                 </div>
+                              </div>
+                              <span
+                                 @click="isEditable && addItem()"
+                                 class="flex justify-center items-center text-black text-xl font-normal leading-normal px-4 h-8 py-1 bg-white grow shrink basis-0 rounded-lg shadow gap-2 sm:ml-2 hover:cursor-pointer hover:bg-[#D3D3D3]"
+                                 >Add</span
+                              >
+                           </div>
+                        </div>
+                        <div class="w-full h-24 overflow-auto">
+                           <ul :class="{ 'no-select': !isEditable }">
+                              <li
+                                 class="w-full flex"
+                                 v-for="(item, index) in currentSubtasks"
+                                 :key="index"
+                                 :class="{ checked: item.checked }"
+                                 @click="isEditable && toggleItem(index)"
+                                 :style="{ 'no-select': !isEditable }"
+                              >
+                                 <div class="w-full ml-8">{{ item.title }}</div>
+                                 <span @click="removeItem(index)" class="w-8 flex items-center justify-center text-center">x</span>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="w-full sm:h-8 flex flex-col-reverse sm:flex-row sm:justify-end items-center justify-center gap-4 pb-8">
+                        <div
+                           @click="toggleSlideCurrentTask"
+                           class="w-full h-full px-2 border-gray-700 justify-center items-center gap-1 flex hover:cursor-pointer"
                         >
-                           <div class="w-full ml-8">{{ item.title }}</div>
-                           <span @click="removeItem(index)" class="w-8 flex items-center justify-center text-center">x</span>
-                        </li>
-                     </ul>
+                           <div class="w-4 h-4 flex justify-center items-center"><img src="../assets/iconoir_cancel.svg" alt="" srcset="" /></div>
+                           <div class="w-8 text-gray-700 text-lg font-normal leading-normal hover:font-semibold">Close</div>
+                        </div>
+                        <div
+                           @click="removeCurrentTask(current_ID_task)"
+                           class="w-full h-full px-2 sm:border-l-2 border-gray-700 justify-center items-center gap-1 flex hover:cursor-pointer"
+                        >
+                           <div class="w-4 h-4 flex justify-center items-center"><img src="../assets/slider_current_task_deleted.svg" alt="" srcset="" /></div>
+                           <div class="w-10 text-gray-700 text-lg font-normal leading-normal hover:font-semibold">Delete</div>
+                        </div>
+                        <div
+                           v-if="!isEditable"
+                           @click="editTask"
+                           class="w-full h-full px-2 sm:border-l-2 border-gray-700 justify-center items-center gap-1 flex hover:cursor-pointer"
+                        >
+                           <div class="w-4 h-4 flex justify-center items-center"><img src="../assets/slider_current_task_edit.svg" alt="" srcset="" /></div>
+                           <div class="sm:w-24 text-gray-700 text-lg font-normal leading-normal hover:font-semibold">Edit</div>
+                        </div>
+                        <button
+                           v-if="isEditable"
+                           type="submit"
+                           class="w-full h-full px-2 sm:border-l-2 border-gray-700 justify-center items-center gap-1 flex hover:cursor-pointer"
+                        >
+                           <div class="w-4 h-4 flex justify-center items-center"><img src="../assets/disk.svg" alt="" srcset="" /></div>
+                           <div class="sm:w-20 text-gray-700 text-lg font-normal leading-normal hover:font-semibold">Save Task</div>
+                        </button>
+                     </div>
                   </div>
-               </div>
-               <div class="w-full h-8 flex justify-end items-center gap-4 pb-8">
-                  <div @click="toggleSlideCurrentTask" class="h-full px-2 border-gray-700 justify-center items-center gap-1 flex hover:cursor-pointer">
-                     <div class="w-4 h-4 flex justify-center items-center"><img src="../assets/iconoir_cancel.svg" alt="" srcset="" /></div>
-                     <div class="w-8 text-gray-700 text-lg font-normal leading-normal hover:font-semibold">Close</div>
-                  </div>
-                  <div
-                     @click="removeCurrentTask(current_ID_task)"
-                     class="h-full px-2 border-l-2 border-gray-700 justify-center items-center gap-1 flex hover:cursor-pointer"
-                  >
-                     <div class="w-4 h-4 flex justify-center items-center"><img src="../assets/slider_current_task_deleted.svg" alt="" srcset="" /></div>
-                     <div class="w-10 text-gray-700 text-lg font-normal leading-normal hover:font-semibold">Delete</div>
-                  </div>
-                  <div
-                     v-if="!isEditable"
-                     @click="editTask"
-                     class="h-full px-2 border-l-2 border-gray-700 justify-center items-center gap-1 flex hover:cursor-pointer"
-                  >
-                     <div class="w-4 h-4 flex justify-center items-center"><img src="../assets/slider_current_task_edit.svg" alt="" srcset="" /></div>
-                     <div class="w-24 text-gray-700 text-lg font-normal leading-normal hover:font-semibold">Edit</div>
-                  </div>
-                  <button
-                     v-if="isEditable"
-                     type="submit"
-                     class="h-full px-2 border-l-2 border-gray-700 justify-center items-center gap-1 flex hover:cursor-pointer"
-                  >
-                     <div class="w-4 h-4 flex justify-center items-center"><img src="../assets/disk.svg" alt="" srcset="" /></div>
-                     <div class="w-20 text-gray-700 text-lg font-normal leading-normal hover:font-semibold">Save Task</div>
-                  </button>
                </div>
             </div>
-         </div>
+         </form>
       </div>
-   </form>
+   </div>
 </template>
 
 <script setup>
@@ -400,33 +408,27 @@ const removeCurrentTask = async (id) => {
    }
 }
 .slideNew {
-   left: calc(50% - (76rem / 2) - 7.5rem);
-   top: 4rem;
-   width: 76rem;
-   height: 37rem;
-   background-color: white;
-   animation-name: slideNewContactIn;
+   animation-name: slideNewCurrentTaskIn;
    animation-duration: 1.5s;
 }
 
-@keyframes slideNewContactIn {
+@keyframes slideNewCurrentTaskIn {
    from {
       left: 100%;
    }
    to {
-      left: calc(50% - (76rem / 2) - 7.5rem);
+      left: 0%;
    }
 }
 
 .slideClose {
-   left: 100vw;
    animation-name: slideCloseOut;
    animation-duration: 1.5s;
 }
 
 @keyframes slideCloseOut {
    from {
-      left: calc(50% - (76rem / 2) - 7.5rem);
+      left: 0%;
    }
    to {
       left: 100vw;
@@ -540,5 +542,10 @@ ul li.checked::before {
 
 .addBtn:hover {
    background-color: #bbb;
+}
+
+::-webkit-scrollbar {
+   width: 0px;
+   background: transparent; /* make scrollbar transparent */
 }
 </style>

@@ -8,7 +8,7 @@
          <Sidebar></Sidebar>
       </div>
       <div
-         class="w-full md3:w-[calc(100%-15rem)] h-[calc(100%-6rem)] md3:h-[calc(100vh-6rem)] flex justify-center items-center absolute right-0 bottom-0 bg-[#F6F7F8] md3:overflow-hidden"
+         class="w-full md3:w-[calc(100%-15rem)] h-[calc(100%-6rem)] md3:h-[calc(100vh-6rem)] flex justify-center items-center absolute right-0 bottom-0 bg-[#F6F7F8] overflow-hidden"
       >
          <router-view> </router-view>
       </div>
