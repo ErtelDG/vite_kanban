@@ -1,5 +1,4 @@
 <script setup>
-import DarkModeBtn from "./DarkModeBtn.vue";
 </script>
 <template>
    <div class="h-full w-full pt-16 flex flex-col items-center justify-between bg-[#2a3647]">
