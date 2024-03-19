@@ -323,6 +323,7 @@ const updateCurrentTask = async () => {
    console.log(currentSubtasks.value);
    const requestOptions = {
       method: "POST",
+      mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: updateTask,
    };
@@ -355,6 +356,7 @@ const removeCurrentTask = async (id) => {
 
    const requestOptions = {
       method: "DELETE",
+      mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: delTask,
    };
