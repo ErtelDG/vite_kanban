@@ -356,7 +356,7 @@ const removeCurrentTask = async (id) => {
 
    const requestOptions = {
       method: "DELETE",
-      mode: "same-origin",
+      mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: delTask,
    };
