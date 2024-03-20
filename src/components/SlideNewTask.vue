@@ -187,7 +187,6 @@ const add_new_task = async () => {
 
    const requestOptions = {
       method: "POST",
-      mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: newTask,
    };

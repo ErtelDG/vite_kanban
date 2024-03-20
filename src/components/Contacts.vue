@@ -82,7 +82,6 @@ const remove_contact = async (remove_contact) => {
 
    const requestOptions = {
       method: "DELETE",
-      mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: removeTask,
    };
